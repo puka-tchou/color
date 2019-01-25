@@ -1,0 +1,18 @@
+{
+  "name": "color",
+  "version": "0.0.1",
+  "description": "A simple color app",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gaspacchio",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^4.2.1",
+    "jquery": "^3.3.1",
+    "knacss": "^7.1.0",
+    "popper.js": "^1.14.6",
+    "what-input": "^5.1.3"
+  }
+}
