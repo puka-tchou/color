@@ -32,12 +32,22 @@ main {
 	min-height: 100vh;
 	background: #dedede;
 	text-align: center;
+	max-height: 100vh;
+}
+
+main div {
+	max-width: 100%;
 }
 
 /* section.grid {
 	display: flex;
 	flex-flow: column wrap;
 } */
+/*--- TITLE ---*/
+main div.title {
+	min-width: 100%;
+}
+
 
 /*--- PREVIEW ---*/
 .imageContainer {
@@ -58,13 +68,15 @@ main {
 	flex-flow: row wrap;
 	align-items: flex-start;
 	justify-content: center;
+	max-height: 100%;
+	overflow: auto;
 }
 
 .gallery h2 {
 	flex-basis: 100%;
 }
 
-.imageItem {
+.image-item {
 	height: 300px;
 	width: 300px;
 	background: #4d5760;
@@ -74,9 +86,10 @@ main {
 	margin: 1%;
 	box-sizing: border-box;
 	border: #4d5760 0 solid;
+	position: relative;
 }
 
-.imageItem:hover {
+.image-item:hover {
 	transform: scale(1.05);
 }
 /*--- ASIDE ---*/
@@ -89,6 +102,9 @@ aside {
 	background-attachment: fixed;
 	background-size: cover;
 	color: #fff;
+	-ms-interpolation-mode: nearest-neighbor;
+	image-rendering: pixelated;
+	image-rendering: crisp-edges;
 }
 
 /*--- CLOCK ---*/
