@@ -21,10 +21,12 @@
         {
             name: "github",
             url: "#"
+        },
+        {
+            name: "documentation",
+            url: "/docs/index.html"
         }
     ];
-    /** @type {Number} The maximum images allowed in the gallery */
-    var maxImages = 10;
 
     /**
      * Insert a tag with text inside an HTML element
@@ -53,9 +55,6 @@
      */
     function displayMenu(menu) {
         for (var key in menu) {
-            // if (!item[key].name || !item[key].url) {
-            //     console.warn("L'élément avec l'index = " + key + " du menu est vide !");
-            // }
             var menuItem = insertElement("li", "", ".js-menu");
             var menuLink = insertElement("a", menu[key].name);
             menuLink.setAttribute("class", "nav-link");
@@ -66,23 +65,38 @@
     }
 
     /**
-     * Display the upload button and the title
+     * Display the upload button and the title and add a onclick event to the button
      * @param {Array} images The image gallery
      * @param {Number} max The maximum number of images accepted in the gallery
      */
     function displayUpload(images, max) {
         var uploadTitle = "Analyser une image";
         var uploadButton = insertElement("a", "", ".uploadContainer");
-        uploadButton.setAttribute("role", "button");
-        uploadButton.setAttribute("class", "btn--success");
+        uploadButton.role = "button";
+        uploadButton.className = "btn--success";
         var uploadButtonText = document.createTextNode("Upload");
         if (images.length > max) {
             uploadTitle = "Vous n'avez plus de place dans votre galerie";
             uploadButtonText = document.createTextNode("Supprimer une image");
-            uploadButton.setAttribute("class", "btn--warning");
+            uploadButton.className = "btn--warning";
         }
         insertElement("h1", uploadTitle, ".js-upload-title");
         uploadButton.appendChild(uploadButtonText);
+        var file = document.querySelector("#js-file");
+        uploadButton.onclick = function () {
+            file.click();
+        };
+        file.addEventListener("change", function() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "https://api.imagga.com/v2/colors");
+            xhr.onload = function (event) {
+
+            };
+            xhr.setRequestHeader("authorization", "Basic YWNjX2VhMWFiMDhmM2JjMmI0NjpmNjU1NTRjMjlkZmU2MjBkZjZkNzlhOWI4NTZjOGRjYQ==");
+            var formData = new FormData;
+            formData.append("image", file.files[0]);
+            xhr.send(formData);
+        });
     }
 
     /**
@@ -90,7 +104,7 @@
      * @param {Array} images The gallery
      * @param {String} name The name of the image
      * @param {String} path The (relative or absolute) path to the file
-     * @param {String} extension The file extension e.g ".jpg" ".gif"
+     * @param {String} extension The file extension beginning with a dot e.g ".jpg" ".gif"
      * @param {Number} num The number of images we want push
      */
     function pushImage(images, name, path, extension, num) {
@@ -151,16 +165,19 @@
             preview.src = image.url;
             preview.className = "clicked js-image-preview";
             preview.addEventListener("click", removePreview);
+            // console.error("test");
         });
     }
 
     /**
-     * Delete an image form the gallery when the users clisk the button
+     * Delete an image from the gallery when the users cliks on the button
      * @param {String} button The button to delete an image
      * @param {Array} image The list of images
      */
-    function deleteImage(button, image) {        
+    function deleteImage(button, image) {
+        var preview = document.querySelector(".js-image-preview");
         button.addEventListener("click", function (event) {
+            event.stopPropagation();
             var result = images.find(function (item) {
                 return item.url === image.url;
             });
@@ -169,6 +186,9 @@
             var gallery = document.querySelector(".gallery");
             gallery.innerHTML = "";
             displayImages(images);
+            if (preview.getAttribute("src") === image.url) {
+                removePreview();
+            }
         });
     }
 
@@ -192,18 +212,6 @@
         var backgroundPath = "assets/background/";
         var background = document.querySelector("aside");
         background.setAttribute("style", "background-image:url(" + backgroundPath + imageNumber + ".webp)");
-        // var request = new XMLHttpRequest();
-        // request.open('GET', "http://api.giphy.com/v1/gifs/random?api_key=De3Jd3dQlTSX8Ds9968RlGZjEnsl9P35&tag=pixel-art-landscape-nature", true);
-        // request.send();
-        // request.onreadystatechange = processRequest;
-        // function processRequest(event) {
-        //     if (200 === request.status && 4 === request.readyState) {
-        //         var response = JSON.parse(request.responseText);
-        //         var url = response.data.image_original_url
-        //         background.setAttribute("style", "background-image:url(" + url + ")");
-        //         return response.data.image_original_url;
-        //     }
-        // }
     }
 
     /**
@@ -225,8 +233,8 @@
     }
 
     displayMenu(menuItems);
-    pushImage(images, 5, "Landscape ", "uploads/landscape/", ".jpg");
-    displayUpload(maxImages, images);
+    pushImage(images, "Landscape ", "uploads/landscape/", ".jpg", 5);
+    displayUpload(10, images);
     displayImages(images);
     randomBackground(5);
     displayTypes();
