@@ -1,6 +1,6 @@
 # Color
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/aefc19dff8cf4a7f96b28dc0df266c1d)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Gaspacchio/color&amp;utm_campaign=Badge_Grade) [![Latest Documentation](https://doxdox.org/images/badge-flat.svg)](https://doxdox.org/Gaspacchio/color)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/aefc19dff8cf4a7f96b28dc0df266c1d)](https://www.codacy.com?utm_source=github.com&utm_medium=referral&utm_content=Gaspacchio/color&utm_campaign=Badge_Grade)
 
 ## Introduction
 
