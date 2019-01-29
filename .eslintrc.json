@@ -1,4 +1,4 @@
-module.exports = {
+{
     "env": {
         "browser": true
     },
@@ -22,19 +22,9 @@ module.exports = {
         "semi": [
             "error",
             "always"
-        ],
-        "no-console": [
-            "error",
-            {
-                "allow": [
-                    "debug",
-                    "error",
-                    "warn"
-                ]
-            }
         ]
     },
     "plugins": [
         "only-warn"
     ]
-};
+}
