@@ -4,7 +4,8 @@
   "description": "A simple color app",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs": "jsdoc2md src/*.js > DOCUMENTATION.md"
   },
   "author": "Gaspacchio",
   "license": "MIT",
@@ -17,6 +18,8 @@
   },
   "devDependencies": {
     "eslint": "^5.12.1",
-    "eslint-plugin-only-warn": "^1.0.1"
+    "eslint-plugin-only-warn": "^1.0.1",
+    "jsdoc": "^3.5.5",
+    "jsdoc-to-markdown": "^4.0.1"
   }
 }
