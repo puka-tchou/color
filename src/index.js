@@ -50,12 +50,12 @@
      */
     function displayMenu(item) {
         for (var key in item) {
-            if (!item[key].name || !item[key].url) {
-                console.warn("L'élément avec l'index = " + key + " du menu est vide !");
-            }
+            // if (!item[key].name || !item[key].url) {
+            //     console.warn("L'élément avec l'index = " + key + " du menu est vide !");
+            // }
             var menuItem = insertElement("li", "", ".js-menu");
             var menuLink = insertElement("a", item[key].name);
-            menuLink.setAttribute("class", "nav-link")
+            menuLink.setAttribute("class", "nav-link");
             menuLink.setAttribute("href", item[key].url);
             menuItem.setAttribute("class", "nav-item");
             menuItem.appendChild(menuLink);
@@ -72,14 +72,14 @@
         var uploadTitle = "Analyser une image";
         var uploadButton = insertElement("a", "", ".uploadContainer");
         uploadButton.setAttribute("role", "button");
-        uploadButton.setAttribute("class", "btn--success")
+        uploadButton.setAttribute("class", "btn--success");
         var uploadButtonText = document.createTextNode("Upload");
         if (images.length > max) {
             uploadTitle = "Vous n'avez plus de place dans votre galerie";
             uploadButtonText = document.createTextNode("Supprimer une image");
-            uploadButton.setAttribute("class", "btn--warning")
+            uploadButton.setAttribute("class", "btn--warning");
         }
-        insertElement("h1", uploadTitle, ".js-upload-title")
+        insertElement("h1", uploadTitle, ".js-upload-title");
         uploadButton.appendChild(uploadButtonText);
     }
 
@@ -153,7 +153,7 @@
             preview.src = image.url;
             preview.className = "clicked js-image-preview";
             preview.addEventListener("click", removePreview);
-        })
+        });
     }
 
 
@@ -161,13 +161,13 @@
         button.addEventListener("click", function (event) {
             var result = images.find(function (item) {
                 return item.url === image.url;
-            })
+            });
             var key = images.indexOf(result);
             images.splice(key, 1);
             var gallery = document.querySelector(".gallery");
             gallery.innerHTML = "";
             displayImages(images);
-        })
+        });
     }
 
     /**
@@ -191,7 +191,7 @@
     function randomBackground(i) {
         var imageNumber = getRandomInt(i);
         var backgroundPath = "assets/background/";
-        var background = document.querySelector('aside');
+        var background = document.querySelector("aside");
         background.setAttribute("style", "background-image:url(" + backgroundPath + imageNumber + ".webp)");
 
         // var request = new XMLHttpRequest();
@@ -224,7 +224,8 @@
      */
     function displayTypes() {
         for (var key in validExtensions) {
-            var listItem = insertElement("li", validExtensions[key], "ul.js-extension-list")
+            // var listItem = 
+            insertElement("li", validExtensions[key], "ul.js-extension-list");
         }
     }
 
@@ -245,10 +246,10 @@
             tag.appendChild(document.createTextNode(text));
         }
         if ("undefined" !== typeof parent) {
-            var parent = document.querySelector(parent);
+            parent = document.querySelector(parent);
             parent.appendChild(tag);
         }
-        return tag
+        return tag;
     }
 
     displayMenu(menuItems);
@@ -258,7 +259,7 @@
     randomBackground(5);
     displayTypes();
 })
-    /**
-     * Execute anonymous function
-     */
-    ();
+/**
+* Execute anonymous function
+*/
+();
