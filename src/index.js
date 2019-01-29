@@ -40,16 +40,14 @@
             url: "#"
         }
     ];
-    /** @type {Number} - the maximum images in the gallery */
+    /** @type {Number} The maximum images allowed in the gallery */
     var maxImages = 10;
 
     /**
-     * Create an element with some text inside and append it to a parent
-     * 
-     * @param {String} tag
-     * @param {String} text
-     * @param {String} parent
-     * @returns {Object}
+     * Insert a tag with text inside an HTML element
+     * @param {String} tag The HTML tag to create
+     * @param {String} text The text that will be displayed inside the tag. e.g. <a>Text</a>
+     * @param {String} parent The parent of the created tag. The tag will be inserted into this parent
      */
     function insertElement(tag, text, parent) {
         if (!tag || "string" !== typeof tag) {
@@ -68,18 +66,17 @@
 
     /**
      * Display the menu links
-     * 
-     * @param {Array} item - The menu array
+     * @param {Array} menu The array containing menu objects
      */
-    function displayMenu(item) {
-        for (var key in item) {
+    function displayMenu(menu) {
+        for (var key in menu) {
             // if (!item[key].name || !item[key].url) {
             //     console.warn("L'élément avec l'index = " + key + " du menu est vide !");
             // }
             var menuItem = insertElement("li", "", ".js-menu");
-            var menuLink = insertElement("a", item[key].name);
+            var menuLink = insertElement("a", menu[key].name);
             menuLink.setAttribute("class", "nav-link");
-            menuLink.setAttribute("href", item[key].url);
+            menuLink.setAttribute("href", menu[key].url);
             menuItem.setAttribute("class", "nav-item");
             menuItem.appendChild(menuLink);
         }
@@ -87,11 +84,10 @@
 
     /**
      * Display the upload button and the title
-     *
-     * @param {Number} max - the maximum number of images accepted
-     * @param {Array} images - the images
+     * @param {Array} images The image gallery
+     * @param {Number} max The maximum number of images accepted in the gallery
      */
-    function displayUpload(max, images) {
+    function displayUpload(images, max) {
         var uploadTitle = "Analyser une image";
         var uploadButton = insertElement("a", "", ".uploadContainer");
         uploadButton.setAttribute("role", "button");
@@ -107,16 +103,15 @@
     }
 
     /**
-     * Fills the image table with images
-     * 
-     * @param {Array} images - the array containing the images
-     * @param {String} name - the name of the image file
-     * @param {Number} numberOfImages - The number of images we want to display
-     * @param {String} path - the (relative) path to the image file
-     * @param {String} extension - the file extension
+     * Push images in the image table
+     * @param {Array} images The gallery
+     * @param {String} name The name of the image
+     * @param {String} path The (relative or absolute) path to the file
+     * @param {String} extension The file extension e.g ".jpg" ".gif"
+     * @param {Number} num The number of images we want push
      */
-    function pushImage(images, numberOfImages, name, path, extension) {
-        for (var index = 0; index < numberOfImages; index++) {
+    function pushImage(images, name, path, extension, num) {
+        for (var index = 0; index < num; index++) {
             images.push({
                 name: name + (index + 1),
                 url: path + "image" + index + extension,
@@ -127,9 +122,8 @@
 
     /**
      * Validates the file extension
-     * 
-     * @param {String} toCheck - the thing to be checked
-     * @returns {Boolean} returns "yes" if the extension is valid and "no" if the extension is invalid
+     * @param {String} toCheck The thing to be checked
+     * @returns {Boolean} returns "yes" if the extension is valid (i.e is present in the validExtensions list) and "no" if the extension is invalid
      */
     function isExtensionValid(image) {
         for (var key in validExtensions) {
@@ -141,9 +135,8 @@
     }
 
     /**
-     * Display images
-     * 
-     * @param {Array} images - the array containing all images
+     * Display the images in a gallery and add eventListeners
+     * @param {Array} images The list of images
      */
     function displayImages(images) {
         for (var key in images) {
@@ -165,10 +158,9 @@
     }
 
     /**
-     * Display the image in the preview zone
-     * 
-     * @param {*} item 
-     * @param {*} param 
+     * Display an image in the preview zone when the user cliks it
+     * @param {String} container The image that will be listened
+     * @param {Object} image The object containing the details of the clicked image
      */
     function previewImage(container, image) {
         container.addEventListener("click", function (event) {
@@ -179,7 +171,11 @@
         });
     }
 
-
+    /**
+     * Delete an image form the gallery when the users clisk the button
+     * @param {String} button The button to delete an image
+     * @param {Array} image The list of images
+     */
     function deleteImage(button, image) {        
         button.addEventListener("click", function (event) {
             var result = images.find(function (item) {
@@ -194,8 +190,7 @@
     }
 
     /**
-     * Remove the image from the preview
-     * 
+     * Removes the image from the preview zone when the user clicks it again
      */
     function removePreview() {
         var preview = document.querySelector(".clicked");
@@ -203,25 +198,21 @@
             preview.className = "js-image-preview";
             preview.src = "../assets/cat1.gif";
         }
-        // console.warn("This should not have happened");
     }
 
     /**
-     * Randomly change the background
-     * 
-     * @param {Number} i 
+     * Randomly change the background on page load
+     * @param {Number} i The number of images to pick from (i.e 5 means 6 backgrounds to pick from)
      */
     function randomBackground(i) {
         var imageNumber = getRandomInt(i);
         var backgroundPath = "assets/background/";
         var background = document.querySelector("aside");
         background.setAttribute("style", "background-image:url(" + backgroundPath + imageNumber + ".webp)");
-
         // var request = new XMLHttpRequest();
         // request.open('GET', "http://api.giphy.com/v1/gifs/random?api_key=De3Jd3dQlTSX8Ds9968RlGZjEnsl9P35&tag=pixel-art-landscape-nature", true);
         // request.send();
         // request.onreadystatechange = processRequest;
-
         // function processRequest(event) {
         //     if (200 === request.status && 4 === request.readyState) {
         //         var response = JSON.parse(request.responseText);
@@ -233,21 +224,19 @@
     }
 
     /**
-     * Generate a random number : 0 < number < max
-     *
-     * @param {number} max
-     * @returns number
+     * Randomly generates an integer, between 0 and max
+     * @param {Number} max The maximum of the generated number
+     * @returns {Number} An integer between 0 and max
      */
     function getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max));
     }
 
     /**
-     * Display a list containing the type of files accepted
+     * Display a list containing the extensions of files accepted
      */
     function displayTypes() {
         for (var key in validExtensions) {
-            // var listItem = 
             insertElement("li", validExtensions[key], "ul.js-extension-list");
         }
     }
@@ -260,6 +249,6 @@
     displayTypes();
 })
 /**
-* Execute anonymous function
+* Execute the anonymous function
 */
 ();
