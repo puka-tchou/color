@@ -29,10 +29,13 @@
     ];
 
     /**
-     * Insert a tag with text inside an HTML element
-     * @param {String} tag The HTML tag to create
-     * @param {String} text The text that will be displayed inside the tag. e.g. <a>Text</a>
-     * @param {String} parent The parent of the created tag. The tag will be inserted into this parent
+     * Create a new HTMLElement and append it in the given parent.
+     * 
+     * @description Creates a HTML tag using the first parameter. If the second parameter is set, append text inside this tag. If the third parameter is set, append the created tag inside the parent.
+     * @example insertElement("a", "Click me!", ".a-container");
+     * @param {string} tag The HTML tag to create.
+     * @param {string} text The text that will be displayed inside the tag. e.g. <a>Text</a>
+     * @param {string} parent The parent of the created tag. The tag will be inserted into this parent
      */
     function insertElement(tag, text, parent) {
         if (!tag || "string" !== typeof tag) {
@@ -50,7 +53,10 @@
     }
 
     /**
-     * Display the menu links
+     * Display the menu links.
+     * 
+     * @description Display the menu links.
+     * @example displayMenu(menuItems);
      * @param {Array} menu The array containing menu objects
      */
     function displayMenu(menu) {
@@ -66,27 +72,57 @@
 
     /**
      * Display the upload button and the title and add a onclick event to the button
+     *
      * @param {Array} images The image gallery
-     * @param {Number} max The maximum number of images accepted in the gallery
+     * @param {number} max The maximum number of images accepted in the gallery
      */
     function displayUpload(images, max) {
-        var uploadTitle = "Analyser une image";
+        var uploadContainer = document.querySelector(".uploadContainer");
         var uploadButton = insertElement("a", "", ".uploadContainer");
+        var uploadButtonText = document.createTextNode("upload");
+        var form = insertElement("form");
+        var inputField = insertElement("input");
+        var submitField = insertElement("input");
+
         uploadButton.role = "button";
         uploadButton.className = "btn--success";
-        var uploadButtonText = document.createTextNode("Upload");
+        form.action = "";
+        form.method = "GET";
+        inputField.type = "url";
+        inputField.required = "required";
+        inputField.name = "url";
+        // TODO : Remove temp value
+        inputField.value = "http://www.ecologytheme.com/wp-content/uploads/2016/06/Top-10-Image-Placeholder-Services-1.jpg";
+        submitField.type = "submit";
+        submitField.value = "envoyer";
+        submitField.onclick = function () {
+            sendUrl(form);
+            return false;
+        };
+
         if (images.length > max) {
-            uploadTitle = "Vous n'avez plus de place dans votre galerie";
-            uploadButtonText = document.createTextNode("Supprimer une image");
             uploadButton.className = "btn--warning";
+            uploadButtonText = document.createTextNode("supprimer une image");
         }
-        insertElement("h1", uploadTitle, ".js-upload-title");
+
         uploadButton.appendChild(uploadButtonText);
+        form.appendChild(inputField);
+        form.appendChild(submitField);
+        uploadContainer.appendChild(form);
+
+        sendFile(uploadButton);
+    }
+
+    /**
+     * 
+     * @param {HTMLElement} button 
+     */
+    function sendFile(button) {
         var file = document.querySelector("#js-file");
-        uploadButton.onclick = function () {
+        button.onclick = function () {
             file.click();
         };
-        file.addEventListener("change", function() {
+        file.addEventListener("change", function () {
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "https://api.imagga.com/v2/colors");
             xhr.onload = function (event) {
@@ -99,13 +135,25 @@
         });
     }
 
+    function sendUrl(form) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://api.imagga.com/v2/colors?image_url=" + form.elements.url.value);
+        xhr.onload = function (event) {
+            var response = JSON.parse(xhr.response);
+            console.log(response);
+        };
+        xhr.setRequestHeader("authorization", "Basic YWNjX2VhMWFiMDhmM2JjMmI0NjpmNjU1NTRjMjlkZmU2MjBkZjZkNzlhOWI4NTZjOGRjYQ==");
+        xhr.send();
+    }
+
     /**
      * Push images in the image table
+     * 
      * @param {Array} images The gallery
-     * @param {String} name The name of the image
-     * @param {String} path The (relative or absolute) path to the file
-     * @param {String} extension The file extension beginning with a dot e.g ".jpg" ".gif"
-     * @param {Number} num The number of images we want push
+     * @param {string} name The name of the image
+     * @param {string} path The (relative or absolute) path to the file
+     * @param {string} extension The file extension beginning with a dot e.g ".jpg" ".gif"
+     * @param {number} num The number of images we want push
      */
     function pushImage(images, name, path, extension, num) {
         for (var index = 0; index < num; index++) {
@@ -118,9 +166,10 @@
     }
 
     /**
-     * Validates the file extension
-     * @param {String} toCheck The thing to be checked
-     * @returns {Boolean} returns "yes" if the extension is valid (i.e is present in the validExtensions list) and "no" if the extension is invalid
+     * Validates the file extension.
+     *
+     * @param {string} image The thing to be checked
+     * @returns {boolean} returns "yes" if the extension is valid (i.e is present in the validExtensions list) and "no" if the extension is invalid
      */
     function isExtensionValid(image) {
         for (var key in validExtensions) {
@@ -133,6 +182,7 @@
 
     /**
      * Display the images in a gallery and add eventListeners
+     *
      * @param {Array} images The list of images
      */
     function displayImages(images) {
@@ -155,8 +205,9 @@
     }
 
     /**
-     * Display an image in the preview zone when the user cliks it
-     * @param {String} container The image that will be listened
+     * Display an image in the preview zone when the user cliks it.
+     *
+     * @param {string} container The image that will be listened
      * @param {Object} image The object containing the details of the clicked image
      */
     function previewImage(container, image) {
@@ -170,8 +221,9 @@
     }
 
     /**
-     * Delete an image from the gallery when the users cliks on the button
-     * @param {String} button The button to delete an image
+     * Delete an image from the gallery when the users cliks on the button.
+     *
+     * @param {string} button The button to delete an image
      * @param {Array} image The list of images
      */
     function deleteImage(button, image) {
@@ -193,7 +245,7 @@
     }
 
     /**
-     * Removes the image from the preview zone when the user clicks it again
+     * Removes the image from the preview zone when the user clicks it again.
      */
     function removePreview() {
         var preview = document.querySelector(".clicked");
@@ -204,8 +256,9 @@
     }
 
     /**
-     * Randomly change the background on page load
-     * @param {Number} i The number of images to pick from (i.e 5 means 6 backgrounds to pick from)
+     * Randomly change the background on page load.
+     *
+     * @param {number} i The number of images to pick from (i.e 5 means 6 backgrounds to pick from)
      */
     function randomBackground(i) {
         var imageNumber = getRandomInt(i);
@@ -215,21 +268,33 @@
     }
 
     /**
-     * Randomly generates an integer, between 0 and max
-     * @param {Number} max The maximum of the generated number
-     * @returns {Number} An integer between 0 and max
+     * Randomly generates an integer, between 0 and max.
+     *
+     * @param {number} max The maximum of the generated number
+     * @returns {number} An integer between 0 and max
      */
     function getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max));
     }
 
     /**
-     * Display a list containing the extensions of files accepted
+     * Display a list containing the extensions of files accepted.
      */
     function displayTypes() {
         for (var key in validExtensions) {
             insertElement("li", validExtensions[key], "ul.js-extension-list");
         }
+    }
+
+    function findIp() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://ipinfo.io/json");
+        xhr.setRequestHeader("token", "4adcfde13a04f7");
+        xhr.onload = function (event) {
+            var response = JSON.parse(xhr.responseText);
+            console.log(response.city);
+        };
+        xhr.send();
     }
 
     displayMenu(menuItems);
@@ -238,8 +303,9 @@
     displayImages(images);
     randomBackground(5);
     displayTypes();
+    // findIp();
 })
 /**
-* Execute the anonymous function
-*/
+    * Execute the anonymous function
+    */
 ();
