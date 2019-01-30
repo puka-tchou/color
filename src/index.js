@@ -34,8 +34,8 @@
      * @description Creates a HTML tag using the first parameter. If the second parameter is set, append text inside this tag. If the third parameter is set, append the created tag inside the parent.
      * @example insertElement("a", "Click me!", ".a-container");
      * @param {string} tag The HTML tag to create.
-     * @param {string} text The text that will be displayed inside the tag. e.g. <a>Text</a>
-     * @param {string} parent The parent of the created tag. The tag will be inserted into this parent
+     * @param {string} text The text that will be displayed inside the tag. E.g. <a>Text</a>.
+     * @param {string} parent The parent of the created tag. The tag will be inserted into this parent.
      */
     function insertElement(tag, text, parent) {
         if (!tag || "string" !== typeof tag) {
@@ -57,7 +57,7 @@
      * 
      * @description Display the menu links.
      * @example displayMenu(menuItems);
-     * @param {Array} menu The array containing menu objects
+     * @param {Array} menu The array containing menu objects.
      */
     function displayMenu(menu) {
         for (var key in menu) {
@@ -71,10 +71,12 @@
     }
 
     /**
-     * Display the upload button and the title and add a onclick event to the button
+     * Display the upload button and the title and add a onclick event to the button.
      *
-     * @param {Array} images The image gallery
-     * @param {number} max The maximum number of images accepted in the gallery
+     * @description //TODO
+     * @example //TODO
+     * @param {Array} images The image gallery.
+     * @param {number} max The maximum number of images accepted in the gallery.
      */
     function displayUpload(images, max) {
         var uploadContainer = document.querySelector(".uploadContainer");
@@ -114,8 +116,11 @@
     }
 
     /**
+     * Sends the file to the web service.
      * 
-     * @param {HTMLElement} button 
+     * @description //TODO
+     * @example //TODO
+     * @param {HTMLElement} button The button which is clicked by the user.
      */
     function sendFile(button) {
         var file = document.querySelector("#js-file");
@@ -147,13 +152,15 @@
     }
 
     /**
-     * Push images in the image table
+     * Push images in the image table.
      * 
-     * @param {Array} images The gallery
-     * @param {string} name The name of the image
-     * @param {string} path The (relative or absolute) path to the file
-     * @param {string} extension The file extension beginning with a dot e.g ".jpg" ".gif"
-     * @param {number} num The number of images we want push
+     * @description //TODO
+     * @example //TODO
+     * @param {Array} images The gallery.
+     * @param {string} name The name of the image.
+     * @param {string} path The (relative or absolute) path to the file.
+     * @param {string} extension The file extension beginning with a dot e.g ".jpg" ".gif".
+     * @param {number} num The number of images we want push.
      */
     function pushImage(images, name, path, extension, num) {
         for (var index = 0; index < num; index++) {
@@ -168,8 +175,10 @@
     /**
      * Validates the file extension.
      *
-     * @param {string} image The thing to be checked
-     * @returns {boolean} returns "yes" if the extension is valid (i.e is present in the validExtensions list) and "no" if the extension is invalid
+     * @description //TODO
+     * @example //TODO
+     * @param {string} image The thing to be checked.
+     * @returns {boolean} Returns "yes" if the extension is valid (i.e is present in the validExtensions list) and "no" if the extension is invalid.
      */
     function isExtensionValid(image) {
         for (var key in validExtensions) {
@@ -181,9 +190,11 @@
     }
 
     /**
-     * Display the images in a gallery and add eventListeners
+     * Display the images in a gallery and add eventListeners.
      *
-     * @param {Array} images The list of images
+     * @description //TODO
+     * @example //TODO
+     * @param {Array} images The list of images.
      */
     function displayImages(images) {
         for (var key in images) {
@@ -207,8 +218,10 @@
     /**
      * Display an image in the preview zone when the user cliks it.
      *
-     * @param {string} container The image that will be listened
-     * @param {Object} image The object containing the details of the clicked image
+     * @description //TODO
+     * @example //TODO
+     * @param {string} container The image that will be listened.
+     * @param {Object} image The object containing the details of the clicked image.
      */
     function previewImage(container, image) {
         container.addEventListener("click", function (event) {
@@ -223,8 +236,10 @@
     /**
      * Delete an image from the gallery when the users cliks on the button.
      *
-     * @param {string} button The button to delete an image
-     * @param {Array} image The list of images
+     * @description //TODO
+     * @example //TODO
+     * @param {string} button The button to delete an image.
+     * @param {Array} image The list of images.
      */
     function deleteImage(button, image) {
         var preview = document.querySelector(".js-image-preview");
@@ -246,6 +261,9 @@
 
     /**
      * Removes the image from the preview zone when the user clicks it again.
+     * 
+     * @description //TODO
+     * @example //TODO
      */
     function removePreview() {
         var preview = document.querySelector(".clicked");
@@ -258,7 +276,9 @@
     /**
      * Randomly change the background on page load.
      *
-     * @param {number} i The number of images to pick from (i.e 5 means 6 backgrounds to pick from)
+     * @description //TODO
+     * @example //TODO
+     * @param {number} i The number of images to pick from (i.e 5 means 6 backgrounds to pick from).
      */
     function randomBackground(i) {
         var imageNumber = getRandomInt(i);
@@ -270,8 +290,10 @@
     /**
      * Randomly generates an integer, between 0 and max.
      *
-     * @param {number} max The maximum of the generated number
-     * @returns {number} An integer between 0 and max
+     * @description //TODO
+     * @example //TODO
+     * @param {number} max The maximum of the generated number.
+     * @returns {number} An integer between 0 and max.
      */
     function getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max));
@@ -279,6 +301,9 @@
 
     /**
      * Display a list containing the extensions of files accepted.
+     * 
+     * @description //TODO
+     * @example //TODO
      */
     function displayTypes() {
         for (var key in validExtensions) {
