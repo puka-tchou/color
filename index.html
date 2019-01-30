@@ -3,66 +3,58 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
     <title>Document</title>
 
-    <link rel="stylesheet" href="src/style.css">
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="node_modules/knacss/css/knacss.css">
 
 </head>
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-md navbar-light bg-light">
-            <a class="navbar-brand" href="#">Brand</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto js-menu">
+        <nav>
+            <a href="#">Brand</a>
+            <div>
+                <ul class="js-menu">
                     <!-- Menu populated with createMenu(); -->
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Chercher dans la documentation"
-                        aria-label="Rechercher">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
+                <form>
+                    <input type="search" placeholder="Chercher dans la documentation" aria-label="Rechercher">
+                    <button class="" type="submit">Rechercher</button>
                 </form>
             </div>
         </nav>
     </header>
 
-    <main class="box-shadow padding">
-        <div class="uploadContainer center title">
+    <main>
+        <div class="js-upload-container">
             <h1>Analyser une image</h1>
             <!-- Bouton d'upload -->
             <input type="file" name="file" id="js-file" style="display: none;">
         </div>
-        <div class="autogrid">
-            <div class="imageContainer">
-                <div class="padding">
+        <div>
+            <div>
+                <div>
                     <p>Preview zone</p>
                     <img src="assets/cat1.gif" alt="An animation to make the time go faster..." class="js-image-preview placeholder">
                     <!-- Cat by Alejandro Mariscal https://dribbble.com/shots/3608557-Cat -->
                 </div>
-                <div class="padding">
+                <div>
                     <p>Color zone</p>
                 </div>
             </div>
-            <div class="gallery contained">
-                <h2 class="galleryName"></h2>
+            <div class="js-gallery">
+                <h2 class="js-gallery-title"></h2>
             </div>
         </div>
     </main>
 
-    <aside class="flex-container">
-        <div class="clock item-center h1-like"></div>
+    <aside>
+
     </aside>
 
-    <footer class="autogrid dark padding">
+    <footer>
         <div>
             <h3>Liste des extensions acceptées</h3>
             <ul class="js-extension-list">
@@ -72,17 +64,14 @@
         <div>
             <h3>Test</h3>
         </div>
-        <div class="test">
+        <div>
             <h3>color zone</h3>
         </div>
     </footer>
 
-    <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="src/index.js"></script>
-    <script type="text/javascript" src="src/clock.js"></script>
 
-<!-- 
+    <!-- 
   /\_/\
 =( °w° )=
   )   (  //
