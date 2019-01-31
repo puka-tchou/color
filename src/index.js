@@ -9,23 +9,22 @@
         ".gif"
     ];
     var images = [];
-    var menuItems = [
-        {
-            name: "accueil",
-            url: "index.html"
-        },
-        {
-            name: "galerie",
-            url: "gallery.html"
-        },
-        {
-            name: "github",
-            url: "#"
-        },
-        {
-            name: "documentation",
-            url: "/docs/index.html"
-        }
+    var menuItems = [{
+        name: "accueil",
+        url: "index.html"
+    },
+    {
+        name: "galerie",
+        url: "gallery.html"
+    },
+    {
+        name: "github",
+        url: "#"
+    },
+    {
+        name: "documentation",
+        url: "/docs/index.html"
+    }
     ];
 
     /**
@@ -44,8 +43,8 @@
      */
     function insertElement(tag, text, parent) {
         if (!tag || "string" !== typeof tag) {
-            throw new Error("insertElement requires a tag\n" + tag
-                + " is not allowed as a tag parameter");
+            throw new Error("insertElement requires a tag\n" + tag +
+                " is not allowed as a tag parameter");
         }
         tag = document.createElement(tag);
         if ("undefined" !== typeof text) {
@@ -128,11 +127,29 @@
         button.onclick = function () {
             file.click();
         };
-        file.addEventListener("change", function () {
-            var formData = new FormData;
-            formData.append("image", file.files[0]);
-            queryWebService("POST", null, formData);
-        });
+        file.addEventListener(
+            "change",
+            function (event) {
+                // console.log(file.files[0]);
+                // console.log(event);
+                var formData = new FormData;
+                formData.append("image", file.files[0]);
+                queryWebService("POST",
+                    null,
+                    formData,
+                    function (url, xhr) {
+                        var reader = new FileReader();
+                        reader.onloadend = function (event) {
+                            var file = event.target.result;
+                            pushImage(file, JSON.parse(xhr.response).result.colors.image_colors);
+                            displayImages();
+                            document.querySelector("div.js-gallery a.image-item:last-child").click();
+                            // console.log(file);
+                        };
+                        reader.readAsDataURL(file.files[0]);
+                    }
+                );
+            });
     }
 
     /**
@@ -145,7 +162,11 @@
     function onFormSubmit(form) {
         form.addEventListener("submit", function (event) {
             event.preventDefault();
-            queryWebService("GET", form.elements.url.value, null);
+            queryWebService("GET", form.elements.url.value, null, function (url, xhr) {
+                pushImage(url, JSON.parse(xhr.response).result.colors.image_colors);
+                displayImages();
+                document.querySelector("div.js-gallery a.image-item:last-child").click();
+            });
         });
     }
 
@@ -157,9 +178,10 @@
      * @param {string} method The used to connect to the web service.
      * @param {string} query The complete query to append at the end of the url
      * e.g "&Yay".
-     * @param {string} body The value that will go in the xhr.send() statement.
+     * @param {FormData} body The value that will go in the xhr.send() statement.
+     * @param {*} success
      */
-    function queryWebService(method, query, body) {
+    function queryWebService(method, query, body, success) {
         var xhr = new XMLHttpRequest();
         if (null === query) {
             xhr.open(
@@ -169,8 +191,8 @@
         } else {
             xhr.open(
                 method,
-                "https://api.imagga.com/v2/colors?extract_object_colors=0&image_url="
-                + query
+                "https://api.imagga.com/v2/colors?extract_object_colors=0&image_url=" +
+                query
             );
         }
         xhr.setRequestHeader(
@@ -179,14 +201,12 @@
         );
         xhr.onload = function (event) {
             if (200 === xhr.status) {
-                var response = JSON.parse(xhr.response);
-                pushImage(query, response.result.colors.image_colors);
-                displayImages();
-                previewImage();
+                success(query, xhr);
             }
         };
         xhr.send(body);
     }
+
 
     /**
      * Push images in the image table.
@@ -198,30 +218,30 @@
      */
     function pushImage(url, colors) {
         images.push({
-            name: url,
             url: url,
             colors: colors
         });
+        // console.log(images);
     }
 
-    /**
-     * Validates the file extension.
-     *
-     * @description //TODO
-     * @example //TODO
-     * @param {string} image The thing to be checked.
-     * @returns {boolean} Returns "yes" if the extension is valid
-     * i.e is present in the validExtensions list) and "no" if the extension
-     * is invalid.
-     */
-    function isExtensionValid(image) {
-        for (var key in validExtensions) {
-            if (image.extension === validExtensions[key]) {
-                return true;
-            }
-        }
-        return false;
-    }
+    // /**
+    //  * Validates the file extension.
+    //  *
+    //  * @description //TODO
+    //  * @example //TODO
+    //  * @param {string} image The thing to be checked.
+    //  * @returns {boolean} Returns "yes" if the extension is valid
+    //  * i.e is present in the validExtensions list) and "no" if the extension
+    //  * is invalid.
+    //  */
+    // function isExtensionValid(image) {
+    //     for (var key in validExtensions) {
+    //         if (image.extension === validExtensions[key]) {
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
 
     /**
      * Display the images in a gallery and add eventListeners.
@@ -241,10 +261,10 @@
             galleryItem.appendChild(deleteBtn);
             galleryItem.className = "image-item box-shadow transition";
             galleryItem.setAttribute("dataUrl", images[key].url);
-            galleryItem.alt = images[key].name;
-            galleryItem.title = images[key].name;
+            // galleryItem.alt = images[key].name;
+            // galleryItem.title = images[key].name;
             galleryItem.style = "background-image: url(" + images[key].url + ")";
-            galleryItem.addEventListener("click", previewImage(galleryItem));
+            galleryItem.addEventListener("click", previewImage);
             deleteImage(deleteBtn, images[key]);
         }
     }
@@ -254,11 +274,11 @@
      *
      * @description //TODO
      * @example //TODO
-     * @param {Object} image The object containing the details of the clicked image.
+     * @param {undefined} event
      */
-    function previewImage(image) {
+    function previewImage(event) {
         var preview = document.querySelector(".js-image-preview");
-        preview.src = image.getAttribute("dataUrl") ;
+        preview.src = event.target.getAttribute("dataUrl");
         preview.className = "clicked js-image-preview";
         preview.addEventListener("click", removePreview);
     }
@@ -280,7 +300,7 @@
             });
             var key = images.indexOf(result);
             images.splice(key, 1);
-            var gallery = document.querySelector(".gallery");
+            var gallery = document.querySelector(".js-gallery");
             gallery.innerHTML = "";
             displayImages(images);
             if (preview.getAttribute("src") === image.url) {
@@ -356,12 +376,12 @@
     displayMenu(menuItems);
     displayUpload(10, images);
     displayImages(images);
-    randomBackground(5);
+    // randomBackground(5);
     displayTypes();
     // findIp();
 })
 
-    /**
-        * Execute the anonymous function
-        */
-    ();
+/**
+ * Execute the anonymous function
+ */
+();

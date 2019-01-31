@@ -8,30 +8,30 @@
 
     <title>Document</title>
 
-
+    <link rel="stylesheet" href="node_modules/knacss/css/knacss.css">
+    <link rel="stylesheet" href="dist/style.css">
 </head>
 
 <body>
     <header>
-        <nav>
-            <a href="#">Brand</a>
-            <div>
-                <ul class="js-menu">
+        <nav class="grid-2 has-gutter">
+                <ul class="js-menu autogrid">
                     <!-- Menu populated with createMenu(); -->
                 </ul>
-                <form>
+                <form class="txtcenter">
                     <input type="search" placeholder="Chercher dans la documentation" aria-label="Rechercher">
-                    <button class="" type="submit">Rechercher</button>
+                    <input class="" type="submit" value="trouver"></button>
                 </form>
-            </div>
         </nav>
     </header>
 
-    <main>
+    <main class="txtcenter">
         <div class="js-upload-container">
             <h1>Analyser une image</h1>
             <!-- Bouton d'upload -->
-            <input type="file" name="file" id="js-file" style="display: none;">
+            <form>
+                <input type="file" name="file" id="js-file" style="display: none;">
+            </form>
         </div>
         <div>
             <div>
@@ -44,8 +44,8 @@
                     <p>Color zone</p>
                 </div>
             </div>
-            <div class="js-gallery">
-                <h2 class="js-gallery-title"></h2>
+            <div class="js-gallery autogrid">
+                <!-- <h2 class="js-gallery-title"></h2> -->
             </div>
         </div>
     </main>
@@ -54,7 +54,7 @@
 
     </aside>
 
-    <footer>
+    <footer class="autogrid">
         <div>
             <h3>Liste des extensions acceptées</h3>
             <ul class="js-extension-list">
