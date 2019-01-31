@@ -383,7 +383,7 @@
      */
     function displayTypes() {
         for (var i = 0; i < validExtensions.length; i++) {
-            insertElement("li", validExtensions[i], "ul.js-extension-list")
+            insertElement("li", validExtensions[i], "ul.js-extension-list");
         }
     }
 
