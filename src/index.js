@@ -348,20 +348,20 @@
         document.querySelector(selector).innerHTML = "";
     }
 
-    // /**
-    //  * Randomly change the background on page load.
-    //  *
-    //  * @description //TODO
-    //  * @example //TODO
-    //  * @param {number} i The number of images to pick from
-    //  * (i.e 5 means 6 backgrounds to pick from).
-    //  */
-    // function randomBackground(i) {
-    //     var imageNumber = getRandomInt(i);
-    //     var backgroundPath = "assets/background/";
-    //     var background = document.querySelector("aside");
-    //     background.style = "background-image:url(" + backgroundPath + imageNumber + ".webp)";
-    // }
+    /**
+     * Randomly change the background on page load.
+     *
+     * @description //TODO
+     * @example //TODO
+     * @param {number} i The number of images to pick from
+     * (i.e 5 means 6 backgrounds to pick from).
+     */
+    function randomBackground(i) {
+        var imageNumber = getRandomInt(i);
+        var backgroundPath = "assets/background/";
+        var background = document.querySelector("aside");
+        background.style = "background-image:url(" + backgroundPath + imageNumber + ".webp)";
+    }
 
     /**
      * Randomly generates an integer, between 0 and max.
@@ -400,7 +400,7 @@
     displayMenu(menuItems);
     displayUpload(10);
     displayImages();
-    // randomBackground(5);
+    randomBackground(5);
     displayTypes();
     // findIp();
 })

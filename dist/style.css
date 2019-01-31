@@ -2713,6 +2713,16 @@ header ul {
   background-size: cover;
 }
 
+/*--- ASIDE ---*/
+aside {
+  min-height: 50vh;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+}
+
 /*--- FOOTER ---*/
 footer {
   background-color: #454d5d;
