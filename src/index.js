@@ -8,7 +8,11 @@
         ".png",
         ".gif"
     ];
-    var images = [];
+    var namespace = "color_app_image";
+    var images = JSON.parse(localStorage.getItem(namespace));
+    if (!images) {
+        images = [];
+    }
     var menuItems = [{
         name: "accueil",
         url: "index.html"
@@ -221,7 +225,7 @@
             url: url,
             colors: colors
         });
-        // console.log(images);
+        localStorage.setItem(namespace, JSON.stringify(images));
     }
 
     // /**
@@ -278,9 +282,14 @@
      */
     function previewImage(event) {
         var preview = document.querySelector(".js-image-preview");
-        preview.src = event.target.getAttribute("dataUrl");
-        preview.className = "clicked js-image-preview";
+        var url = event.target.getAttribute("dataUrl");
+        preview.src = url;
+        preview.className = "clicked js-image-preview item-center";
         preview.addEventListener("click", removePreview);
+        var image = images.find(function (element) {
+            return url === element.url;
+        });
+        displayColor(image);
     }
 
     /**
@@ -300,6 +309,7 @@
             });
             var key = images.indexOf(result);
             images.splice(key, 1);
+            localStorage.setItem(namespace, JSON.stringify(images));
             var gallery = document.querySelector(".js-gallery");
             gallery.innerHTML = "";
             displayImages(images);
@@ -318,8 +328,16 @@
     function removePreview() {
         var preview = document.querySelector(".clicked");
         if (preview) {
-            preview.className = "js-image-preview";
+            preview.className = "js-image-preview item-center";
             preview.src = "../assets/cat1.gif";
+        }
+    }
+
+    function displayColor(image) {
+        // console.log(image);
+        document.querySelector(".js-color-list").innerHTML = "";
+        for (var key in image.colors) {
+            insertElement("li", image.colors[key].html_code, ".js-color-list");
         }
     }
 
@@ -375,7 +393,7 @@
 
     displayMenu(menuItems);
     displayUpload(10, images);
-    displayImages(images);
+    displayImages();
     // randomBackground(5);
     displayTypes();
     // findIp();
