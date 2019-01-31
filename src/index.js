@@ -382,8 +382,8 @@
      * @example //TODO
      */
     function displayTypes() {
-        for (var key in validExtensions) {
-            insertElement("li", validExtensions[key], "ul.js-extension-list");
+        for (var i = 0; i < validExtensions.length; i++) {
+            insertElement("li", validExtensions[i], "ul.js-extension-list")
         }
     }
 
