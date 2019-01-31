@@ -328,6 +328,7 @@
         if (preview) {
             preview.className = "js-image-preview item-center";
             preview.src = "../assets/cat1.gif";
+            removeInside(".js-color-list");
         }
     }
 
