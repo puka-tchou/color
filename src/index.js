@@ -1,6 +1,7 @@
 /**
  * Self-executed anonymous function
  */
+"use strict";
 (function () {
     var app = {
         namespace: "color_app",
