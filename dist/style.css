@@ -2686,12 +2686,32 @@ button:focus {
   display: none;
 }
 
+/*--- GENERAL LAYOUT ---*/
+.padding {
+  padding: 1em;
+}
+
+.background {
+  min-height: 100vh;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+}
+
 /*--- HEADER ---*/
 header {
   background-color: #e7e9ed;
 }
 header ul {
   list-style-type: none;
+}
+
+/*--- MAIN ---*/
+main {
+  min-width: 100%;
+  background: #e7e9ed;
 }
 
 /*--- PREVIEW ---*/
@@ -2711,16 +2731,6 @@ header ul {
   height: 300px;
   background-position: center;
   background-size: cover;
-}
-
-/*--- ASIDE ---*/
-aside {
-  min-height: 50vh;
-  background-position: center;
-  background-attachment: fixed;
-  background-size: cover;
-  image-rendering: crisp-edges;
-  image-rendering: pixelated;
 }
 
 /*--- FOOTER ---*/

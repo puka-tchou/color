@@ -2,61 +2,72 @@
 <html lang="fr">
 
 <head>
+    <!--Meta-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
-
+    <!--Document information-->
     <title>Document</title>
-
+    <!--Icons-->
+    <link rel="apple-touch-icon" sizes="180x180" href="/src/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/src/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="194x194" href="/src/icons/favicon-194x194.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/src/icons/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/icons/favicon-16x16.png">
+    <link rel="manifest" href="/src/icons/site.webmanifest">
+    <link rel="mask-icon" href="/src/icons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/src/icons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/src/icons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!--Styles-->
     <link rel="stylesheet" href="node_modules/knacss/css/knacss.css">
     <link rel="stylesheet" href="dist/style.css">
 </head>
 
 <body>
-    <header>
+    <header class="padding">
         <nav class="grid-2 has-gutter">
-                <ul class="js-menu autogrid">
-                    <!-- Menu populated with createMenu(); -->
-                </ul>
-                <form class="txtcenter">
-                    <input type="search" placeholder="Chercher dans la documentation" aria-label="Rechercher">
-                    <input class="" type="submit" value="trouver"></button>
-                </form>
+            <ul class="js-menu autogrid">
+                <!-- Menu populated with createMenu(); -->
+            </ul>
+            <form class="txtright">
+                <input type="search" placeholder="Chercher dans la documentation" aria-label="Rechercher">
+                <input class="" type="submit" value="trouver"></button>
+            </form>
         </nav>
     </header>
 
-    <main class="txtcenter">
-        <div class="js-upload-container">
-            <h1>Analyser une image</h1>
-            <!-- Bouton d'upload -->
-            <form>
-                <input type="file" name="file" id="js-file" style="display: none;">
-            </form>
-        </div>
-        <div>
+    <div class="flex-container background">
+        <main class="txtcenter item-center padding">
+            <div class="js-upload-container">
+                <h1>Analyser une image</h1>
+                <!-- Bouton d'upload -->
+                <form>
+                    <input type="file" name="file" id="js-file" style="display: none;">
+                </form>
+            </div>
             <div>
-                <div class="flex-container preview">
-                    <img src="assets/cat1.gif" alt="An animation to make the time go faster..." class="js-image-preview placeholder item-center">
-                    <!-- Cat by Alejandro Mariscal https://dribbble.com/shots/3608557-Cat -->
-                </div>
                 <div>
-                    <p>Color zone</p>
-                    <ul class="js-color-list">
+                    <div class="flex-container preview">
+                        <img src="assets/cat1.gif" alt="An animation to make the time go faster..." class="js-image-preview placeholder item-center">
+                        <!-- Cat by Alejandro Mariscal https://dribbble.com/shots/3608557-Cat -->
+                    </div>
+                    <div>
+                        <p>Color zone</p>
+                        <ul class="js-color-list">
 
-                    </ul>
+                        </ul>
+                    </div>
+                </div>
+                <div class="js-gallery autogrid">
+                    <!-- <h2 class="js-gallery-title"></h2> -->
                 </div>
             </div>
-            <div class="js-gallery autogrid">
-                <!-- <h2 class="js-gallery-title"></h2> -->
-            </div>
-        </div>
-    </main>
+        </main>
+    </div>
 
-    <aside>
-
-    </aside>
-
-    <footer class="autogrid">
+    <footer class="autogrid padding">
         <div>
             <h3>Liste des extensions acceptées</h3>
             <ul class="js-extension-list">

@@ -1,11 +1,31 @@
 @import "../node_modules/knacss/sass/knacss.scss";
 
+/*--- GENERAL LAYOUT ---*/
+.padding {
+	padding: 1em;
+}
+
+.background {
+	min-height: 100vh;
+	background-position: center;
+	background-attachment: fixed;
+	background-size: cover;
+	image-rendering: crisp-edges;
+	image-rendering: pixelated;
+}
+
 /*--- HEADER ---*/
 header {
 	background-color: $gray-200;
 	ul {
 		list-style-type: none;
 	}
+}
+
+/*--- MAIN ---*/
+main {
+	min-width: 100%;
+	background: $gray-200;
 }
 
 /*--- PREVIEW ---*/
@@ -25,16 +45,6 @@ header {
 	height: 300px;
 	background-position: center;
 	background-size: cover;
-}
-
-/*--- ASIDE ---*/
-aside {
-	min-height: 50vh;
-	background-position: center;
-	background-attachment: fixed;
-	background-size: cover;
-	image-rendering: crisp-edges;
-	image-rendering: pixelated;
 }
 
 /*--- FOOTER ---*/
