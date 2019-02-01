@@ -376,9 +376,4 @@
     displayImages();
     randomBackground(5);
     displayTypes();
-})
-
-/**
- * Execute the anonymous function
- */
-();
+}());
