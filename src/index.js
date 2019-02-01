@@ -84,39 +84,56 @@
     }
 
     /**
-     * Display the upload button and the title and add a onclick event to the
-     * button.
-     *
+     * Push images in the image table.
+     * 
      * @description //TODO
      * @example //TODO
-     * @param {number} max The maximum number of images accepted in the gallery.
+     * @param {string} url The (relative or absolute) path to the file.
+     * @param {Object} colors The colors of the image.
      */
-    function displayUpload(max) {
-        var uploadContainer = document.querySelector(".js-upload-container");
-        var uploadButton = insertElement("a", "", ".js-upload-container");
-        var uploadButtonText = document.createTextNode("upload");
-        var form = insertElement("form");
-        var inputField = insertElement("input");
-        var submitField = insertElement("input");
-        uploadButton.role = "button";
-        uploadButton.className = "btn--success";
-        form.action = "";
-        form.method = "GET";
-        inputField.type = "url";
-        inputField.required = "required";
-        inputField.name = "url";
-        submitField.type = "submit";
-        submitField.value = "envoyer";
-        if (app.images.length > max) {
-            uploadButton.className = "btn--warning";
-            uploadButtonText = document.createTextNode("supprimer une image");
+    function pushImage(url, colors) {
+        app.images.push({
+            url: url,
+            colors: colors
+        });
+        localStorage.setItem(app.namespace, JSON.stringify(app));
+    }
+
+    /**
+     * Connect to the web service to get images colors.
+     * 
+     * @description //TODO
+     * @example //TODO
+     * @param {string} method The used to connect to the web service.
+     * @param {string} query The complete query to append at the end of the url
+     * e.g "&Yay".
+     * @param {FormData} body The value that will go in the xhr.send() statement.
+     * @param {*} success Something that will be executed when the request is loaded.
+     */
+    function queryWebService(method, query, body, success) {
+        var xhr = new XMLHttpRequest();
+        if (null === query) {
+            xhr.open(
+                method,
+                "https://api.imagga.com/v2/colors?extract_object_colors=0"
+            );
+        } else {
+            xhr.open(
+                method,
+                "https://api.imagga.com/v2/colors?extract_object_colors=0&image_url=" +
+                query
+            );
         }
-        uploadButton.appendChild(uploadButtonText);
-        form.appendChild(inputField);
-        form.appendChild(submitField);
-        uploadContainer.appendChild(form);
-        onFileChange(uploadButton);
-        onFormSubmit(form);
+        xhr.setRequestHeader(
+            "authorization",
+            "Basic YWNjX2VhMWFiMDhmM2JjMmI0NjpmNjU1NTRjMjlkZmU2MjBkZjZkNzlhOWI4NTZjOGRjYQ=="
+        );
+        xhr.onload = function (event) {
+            if (200 === this.status) {
+                success(this, query);
+            }
+        };
+        xhr.send(body);
     }
 
     /**
@@ -177,57 +194,39 @@
     }
 
     /**
-     * Connect to the web service to get images colors.
-     * 
+     * Display the upload button and the title and add a onclick event to the
+     * button.
+     *
      * @description //TODO
      * @example //TODO
-     * @param {string} method The used to connect to the web service.
-     * @param {string} query The complete query to append at the end of the url
-     * e.g "&Yay".
-     * @param {FormData} body The value that will go in the xhr.send() statement.
-     * @param {*} success Something that will be executed when the request is loaded.
+     * @param {number} max The maximum number of images accepted in the gallery.
      */
-    function queryWebService(method, query, body, success) {
-        var xhr = new XMLHttpRequest();
-        if (null === query) {
-            xhr.open(
-                method,
-                "https://api.imagga.com/v2/colors?extract_object_colors=0"
-            );
-        } else {
-            xhr.open(
-                method,
-                "https://api.imagga.com/v2/colors?extract_object_colors=0&image_url=" +
-                query
-            );
+    function displayUpload(max) {
+        var uploadContainer = document.querySelector(".js-upload-container");
+        var uploadButton = insertElement("a", "", ".js-upload-container");
+        var uploadButtonText = document.createTextNode("upload");
+        var form = insertElement("form");
+        var inputField = insertElement("input");
+        var submitField = insertElement("input");
+        uploadButton.role = "button";
+        uploadButton.className = "btn--success";
+        form.action = "";
+        form.method = "GET";
+        inputField.type = "url";
+        inputField.required = "required";
+        inputField.name = "url";
+        submitField.type = "submit";
+        submitField.value = "envoyer";
+        if (app.images.length > max) {
+            uploadButton.className = "btn--warning";
+            uploadButtonText = document.createTextNode("supprimer une image");
         }
-        xhr.setRequestHeader(
-            "authorization",
-            "Basic YWNjX2VhMWFiMDhmM2JjMmI0NjpmNjU1NTRjMjlkZmU2MjBkZjZkNzlhOWI4NTZjOGRjYQ=="
-        );
-        xhr.onload = function (event) {
-            if (200 === this.status) {
-                success(this, query);
-            }
-        };
-        xhr.send(body);
-    }
-
-
-    /**
-     * Push images in the image table.
-     * 
-     * @description //TODO
-     * @example //TODO
-     * @param {string} url The (relative or absolute) path to the file.
-     * @param {Object} colors The colors of the image.
-     */
-    function pushImage(url, colors) {
-        app.images.push({
-            url: url,
-            colors: colors
-        });
-        localStorage.setItem(app.namespace, JSON.stringify(app));
+        uploadButton.appendChild(uploadButtonText);
+        form.appendChild(inputField);
+        form.appendChild(submitField);
+        uploadContainer.appendChild(form);
+        onFileChange(uploadButton);
+        onFormSubmit(form);
     }
 
     /**
