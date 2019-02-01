@@ -1,6 +1,6 @@
 # Color
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/aefc19dff8cf4a7f96b28dc0df266c1d)](https://www.codacy.com?utm_source=github.com&utm_medium=referral&utm_content=Gaspacchio/color&utm_campaign=Badge_Grade) [![DeepScan grade](https://deepscan.io/api/teams/2850/projects/4251/branches/34654/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=2850&pid=4251&bid=34654)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/aefc19dff8cf4a7f96b28dc0df266c1d)](https://www.codacy.com?utm_source=github.com&utm_medium=referral&utm_content=Gaspacchio/color&utm_campaign=Badge_Grade)
 
 ## Introduction
 
