@@ -1,10 +1,10 @@
 # Color
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/aefc19dff8cf4a7f96b28dc0df266c1d)](https://www.codacy.com?utm_source=github.com&utm_medium=referral&utm_content=Gaspacchio/color&utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/aefc19dff8cf4a7f96b28dc0df266c1d)](https://app.codacy.com/project/Gaspacchio/color/dashboard?branchId=10997717&token=ab0CnFyEyrs6yNM)
 
 ## Introduction
 
-> An introduction or lead on what problem you're solving. Answer the question, "Why does someone need this?"
+This is a simple app to extract color from an image using a web service.
 
 ## Code Samples
 
