@@ -71,12 +71,12 @@
      * @example displayMenu(menuItems);
      * @param {Array} menu The array containing menu objects.
      */
-    function displayMenu(menu) {
-        for (var key in menu) {
+    function displayMenu() {
+        for (var key in menuItems) {
             var menuItem = insertElement("li", "", ".js-menu");
-            var menuLink = insertElement("a", menu[key].name);
+            var menuLink = insertElement("a", menuItems[key].name);
             menuLink.setAttribute("class", "nav-link");
-            menuLink.setAttribute("href", menu[key].url);
+            menuLink.setAttribute("href", menuItems[key].url);
             menuItem.setAttribute("class", "nav-item");
             menuItem.appendChild(menuLink);
         }
@@ -136,10 +136,11 @@
             function (event) {
                 var formData = new FormData;
                 formData.append("image", file.files[0]);
-                queryWebService("POST",
+                queryWebService(
+                    "POST",
                     null,
                     formData,
-                    function (url, xhr) {
+                    function (xhr) {
                         var reader = new FileReader();
                         reader.onloadend = function (event) {
                             var file = event.target.result;
@@ -163,11 +164,15 @@
     function onFormSubmit(form) {
         form.addEventListener("submit", function (event) {
             event.preventDefault();
-            queryWebService("GET", form.elements.url.value, null, function (url, xhr) {
-                pushImage(url, JSON.parse(xhr.response).result.colors.image_colors);
-                displayImages();
-                document.querySelector("div.js-gallery a.image-item:last-child").click();
-            });
+            queryWebService(
+                "GET",
+                form.elements.url.value,
+                null,
+                function (url, xhr) {
+                    pushImage(url, JSON.parse(xhr.response).result.colors.image_colors);
+                    displayImages();
+                    document.querySelector("div.js-gallery a.image-item:last-child").click();
+                });
         });
     }
 
@@ -201,8 +206,8 @@
             "Basic YWNjX2VhMWFiMDhmM2JjMmI0NjpmNjU1NTRjMjlkZmU2MjBkZjZkNzlhOWI4NTZjOGRjYQ=="
         );
         xhr.onload = function (event) {
-            if (200 === xhr.status) {
-                success(query, xhr);
+            if (200 === this.status) {
+                success(this, query);
             }
         };
         xhr.send(body);
@@ -225,25 +230,6 @@
         localStorage.setItem(app.namespace, JSON.stringify(app));
     }
 
-    // /**
-    //  * Validates the file extension.
-    //  *
-    //  * @description //TODO
-    //  * @example //TODO
-    //  * @param {string} image The thing to be checked.
-    //  * @returns {boolean} Returns "yes" if the extension is valid
-    //  * i.e is present in the validExtensions list) and "no" if the extension
-    //  * is invalid.
-    //  */
-    // function isExtensionValid(image) {
-    //     for (var key in validExtensions) {
-    //         if (image.extension === validExtensions[key]) {
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    // }
-
     /**
      * Display the images in a gallery and add eventListeners.
      *
@@ -254,7 +240,6 @@
         var gallery = document.querySelector(".js-gallery");
         gallery.innerHTML = "";
         for (var key in app.images) {
-            // if (isExtensionValid(images[key])) {}
             var galleryItem = insertElement("a", "", ".js-gallery");
             var deleteText = document.createTextNode("x");
             var deleteBtn = document.createElement("button");
@@ -262,8 +247,6 @@
             galleryItem.appendChild(deleteBtn);
             galleryItem.className = "image-item box-shadow transition";
             galleryItem.setAttribute("dataUrl", app.images[key].url);
-            // galleryItem.alt = images[key].name;
-            // galleryItem.title = images[key].name;
             galleryItem.style = "background-image: url(" + app.images[key].url + ")";
             galleryItem.addEventListener("click", previewImage);
             deleteImage(deleteBtn, app.images[key]);
@@ -361,7 +344,7 @@
     function randomBackground(i) {
         var imageNumber = getRandomInt(i);
         var backgroundPath = "assets/background/";
-        var background = document.querySelector("aside");
+        var background = document.querySelector(".background");
         background.style = "background-image:url(" + backgroundPath + imageNumber + ".webp)";
     }
 
@@ -389,22 +372,11 @@
         }
     }
 
-    // function findIp() {
-    //     var xhr = new XMLHttpRequest();
-    //     xhr.open("GET", "https://ipinfo.io/json");
-    //     xhr.setRequestHeader("token", "4adcfde13a04f7");
-    //     xhr.onload = function (event) {
-    //         var response = JSON.parse(xhr.responseText);
-    //     };
-    //     xhr.send();
-    // }
-
-    displayMenu(menuItems);
+    displayMenu();
     displayUpload(10);
     displayImages();
     randomBackground(5);
     displayTypes();
-    // findIp();
 })
 
 /**
