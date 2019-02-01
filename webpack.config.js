@@ -4,7 +4,7 @@ const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 module.exports = {
     entry: [
         './src/index.js',
-        './src/index.scss'
+        './src/style.scss'
     ],
     output: {
         path: __dirname + "/dist",
@@ -37,7 +37,7 @@ module.exports = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: 'index.css',
+            filename: 'style.css',
         }),
         new BrowserSyncPlugin({
             host: 'localhost',
