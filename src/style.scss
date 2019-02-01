@@ -12,11 +12,13 @@
 	background-size: cover;
 	image-rendering: crisp-edges;
 	image-rendering: pixelated;
+	padding: 150px 0;
 }
 
 /*--- HEADER ---*/
 header {
 	background-color: $gray-200;
+
 	ul {
 		list-style-type: none;
 	}
@@ -32,6 +34,7 @@ main {
 .preview {
 	height: 50vh;
 	overflow: auto;
+
 	img {
 		max-width: 100%;
 		max-height: 100%;

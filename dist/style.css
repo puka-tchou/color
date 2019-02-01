@@ -2698,6 +2698,7 @@ button:focus {
   background-size: cover;
   image-rendering: crisp-edges;
   image-rendering: pixelated;
+  padding: 150px 0;
 }
 
 /*--- HEADER ---*/
