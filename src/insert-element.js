@@ -23,7 +23,7 @@ export function insertElement(tag, text, parent) {
         // if (parent instanceof HTMLElement) {
         //     parent = document.querySelector(parent);
         // }
-        if ("string" === typeof parent) {
+        if (!(parent instanceof HTMLElement)) {
             parent = document.querySelector(parent);
         }
         parent.appendChild(tag);
