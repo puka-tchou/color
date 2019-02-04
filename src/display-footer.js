@@ -13,7 +13,7 @@ export function displayFooter() {
         ".png",
         ".gif"
     ];
-    for (var i = 0; i < validExtensions.length; i++) {
-        insertElement("li", validExtensions[i], "ul.js-extension-list");
+    for (const element of validExtensions) {
+        insertElement("li", element, "ul.js-extension-list");
     }
 }

@@ -94,8 +94,8 @@ function removePreview() {
 
 function displayColor(image) {
     removeInside(".js-color-list");
-    for (var key in image.colors) {
-        insertElement("li", image.colors[key].html_code, ".js-color-list");
+    for (const color of image.colors) {
+        insertElement("li", color.html_code, ".js-color-list");
     }
 }
 
