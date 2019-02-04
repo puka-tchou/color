@@ -1,12 +1,6 @@
-import {
-    getApp
-} from "./app";
-import {
-    insertElement
-} from "./insert-element";
-
+import { getApp } from "./app";
+import { insertElement } from "./insert-element";
 var app = getApp();
-
 /**
  * Display the images in a gallery and add eventListeners.
  *
@@ -16,20 +10,16 @@ var app = getApp();
 export function displayImages() {
     var gallery = document.querySelector(".js-gallery");
     gallery.innerHTML = "";
-    for (var key in app.images) {
+    for (const image of app.images) {
         var galleryItem = insertElement("a", "", ".js-gallery");
-        var deleteText = document.createTextNode("x");
-        var deleteBtn = document.createElement("button");
-        deleteBtn.appendChild(deleteText);
-        galleryItem.appendChild(deleteBtn);
+        var deleteBtn = insertElement("button", "x", galleryItem);
         galleryItem.className = "image-item box-shadow transition";
-        galleryItem.setAttribute("dataUrl", app.images[key].url);
-        galleryItem.style = "background-image: url(" + app.images[key].url + ")";
+        galleryItem.setAttribute("dataUrl", image.url);
+        galleryItem.style = "background-image: url(" + image.url + ")";
         galleryItem.addEventListener("click", previewImage);
-        deleteImage(deleteBtn, app.images[key]);
+        deleteImage(deleteBtn, image);
     }
 }
-
 /**
  * Display an image in the preview zone when the user cliks it.
  *
@@ -43,12 +33,11 @@ export function previewImage(event) {
     preview.src = url;
     preview.className = "clicked js-image-preview item-center";
     preview.addEventListener("click", removePreview);
-    var image = app.images.find(function (element) {
+    var image = app.images.find(function(element) {
         return url === element.url;
     });
     displayColor(image);
 }
-
 /**
  * Delete an image from the gallery when the users cliks on the button.
  *
@@ -59,9 +48,9 @@ export function previewImage(event) {
  */
 export function deleteImage(button, image) {
     var preview = document.querySelector(".js-image-preview");
-    button.addEventListener("click", function (event) {
+    button.addEventListener("click", function(event) {
         event.stopPropagation();
-        var result = app.images.find(function (item) {
+        var result = app.images.find(function(item) {
             return item.url === image.url;
         });
         var key = app.images.indexOf(result);
@@ -76,7 +65,6 @@ export function deleteImage(button, image) {
         }
     });
 }
-
 /**
  * Removes the image from the preview zone when the user clicks it again.
  * 
@@ -98,7 +86,6 @@ function displayColor(image) {
         insertElement("li", color.html_code, ".js-color-list");
     }
 }
-
 /**
  * Remove all that is inside a selector.
  * 
