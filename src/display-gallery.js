@@ -2,22 +2,34 @@ import { getApp } from "./app";
 import { insertElement } from "./insert-element";
 var app = getApp();
 /**
- * Display the images in a gallery and add eventListeners.
- *
+ * Remove all that is inside a selector.
+ * 
+ * @description //TODO
+ * @example removeInside(".css-selector");
+ * @param {string} selector The selector to target.
+ */
+function removeInside(selector) {
+    document.querySelector(selector).innerHTML = "";
+}
+/**
+ * Removes the image from the preview zone when the user clicks it again.
+ * 
  * @description //TODO
  * @example //TODO
  */
-export function displayImages() {
-    var gallery = document.querySelector(".js-gallery");
-    gallery.innerHTML = "";
-    for (const image of app.images) {
-        var galleryItem = insertElement("a", "", ".js-gallery");
-        var deleteBtn = insertElement("button", "x", galleryItem);
-        galleryItem.className = "image-item box-shadow transition";
-        galleryItem.setAttribute("dataUrl", image.url);
-        galleryItem.style = "background-image: url(" + image.url + ")";
-        galleryItem.addEventListener("click", previewImage);
-        deleteImage(deleteBtn, image);
+function removePreview() {
+    var preview = document.querySelector(".clicked");
+    if (preview) {
+        preview.className = "js-image-preview item-center";
+        preview.src = "../assets/cat1.gif";
+        removeInside(".js-color-list");
+    }
+}
+
+function displayColor(image) {
+    removeInside(".js-color-list");
+    for (const color of image.colors) {
+        insertElement("li", color.html_code, ".js-color-list");
     }
 }
 /**
@@ -37,6 +49,25 @@ export function previewImage(event) {
         return url === element.url;
     });
     displayColor(image);
+}
+/**
+ * Display the images in a gallery and add eventListeners.
+ *
+ * @description //TODO
+ * @example //TODO
+ */
+export function displayImages() {
+    var gallery = document.querySelector(".js-gallery");
+    gallery.innerHTML = "";
+    for (const image of app.images) {
+        var galleryItem = insertElement("a", "", ".js-gallery");
+        var deleteBtn = insertElement("button", "x", galleryItem);
+        galleryItem.className = "image-item box-shadow transition";
+        galleryItem.setAttribute("dataUrl", image.url);
+        galleryItem.style = "background-image: url(" + image.url + ")";
+        galleryItem.addEventListener("click", previewImage);
+        deleteImage(deleteBtn, image);
+    }
 }
 /**
  * Delete an image from the gallery when the users cliks on the button.
@@ -64,35 +95,4 @@ export function deleteImage(button, image) {
             removeInside(".js-color-list");
         }
     });
-}
-/**
- * Removes the image from the preview zone when the user clicks it again.
- * 
- * @description //TODO
- * @example //TODO
- */
-function removePreview() {
-    var preview = document.querySelector(".clicked");
-    if (preview) {
-        preview.className = "js-image-preview item-center";
-        preview.src = "../assets/cat1.gif";
-        removeInside(".js-color-list");
-    }
-}
-
-function displayColor(image) {
-    removeInside(".js-color-list");
-    for (const color of image.colors) {
-        insertElement("li", color.html_code, ".js-color-list");
-    }
-}
-/**
- * Remove all that is inside a selector.
- * 
- * @description //TODO
- * @example removeInside(".css-selector");
- * @param {string} selector The selector to target.
- */
-function removeInside(selector) {
-    document.querySelector(selector).innerHTML = "";
 }
