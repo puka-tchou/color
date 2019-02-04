@@ -11,8 +11,8 @@ import { getApp } from "./app";
 export function pushImage(url, colors) {
     var app = getApp();
     app.images.push({
-        url: url,
-        colors: colors
+        url,
+        colors
     });
     localStorage.setItem(app.namespace, JSON.stringify(app));
 }

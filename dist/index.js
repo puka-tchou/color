@@ -98,18 +98,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 /***/ }),
 
-/***/ "./src/background.js":
-/*!***************************!*\
-  !*** ./src/background.js ***!
-  \***************************/
-/*! exports provided: randomBackground */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"randomBackground\", function() { return randomBackground; });\n/**\r\n * Randomly change the background on page load.\r\n *\r\n * @description //TODO\r\n * @example //TODO\r\n * @param {number} i The number of images to pick from\r\n * (i.e 5 means 6 backgrounds to pick from).\r\n */\nfunction randomBackground(i) {\n  var imageNumber = randomInt(i);\n  var background = document.querySelector(\".background\");\n  background.style = \"background-image:url(assets/background/\" + imageNumber + \".webp)\";\n}\n/**\r\n * Randomly generates an integer, between 0 and max.\r\n *\r\n * @description //TODO\r\n * @example //TODO\r\n * @param {number} max The maximum of the generated number.\r\n * @returns {number} An integer between 0 and max.\r\n */\n\nfunction randomInt(max) {\n  return Math.floor(Math.random() * Math.floor(max));\n}\n\n//# sourceURL=webpack:///./src/background.js?");
-
-/***/ }),
-
 /***/ "./src/display-footer.js":
 /*!*******************************!*\
   !*** ./src/display-footer.js ***!
@@ -166,7 +154,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _display_menu__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./display-menu */ \"./src/display-menu.js\");\n/* harmony import */ var _display_footer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./display-footer */ \"./src/display-footer.js\");\n/* harmony import */ var _background__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./background */ \"./src/background.js\");\n/* harmony import */ var _display_upload__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./display-upload */ \"./src/display-upload.js\");\n/* harmony import */ var _display_gallery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./display-gallery */ \"./src/display-gallery.js\");\n\n\n\n\n\nObject(_display_menu__WEBPACK_IMPORTED_MODULE_0__[\"displayMenu\"])();\nObject(_display_footer__WEBPACK_IMPORTED_MODULE_1__[\"displayFooter\"])();\nObject(_display_upload__WEBPACK_IMPORTED_MODULE_3__[\"displayUpload\"])(10);\nObject(_display_gallery__WEBPACK_IMPORTED_MODULE_4__[\"displayImages\"])();\nObject(_background__WEBPACK_IMPORTED_MODULE_2__[\"randomBackground\"])(5);\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _display_menu__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./display-menu */ \"./src/display-menu.js\");\n/* harmony import */ var _display_footer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./display-footer */ \"./src/display-footer.js\");\n/* harmony import */ var _random_background__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./random-background */ \"./src/random-background.js\");\n/* harmony import */ var _display_upload__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./display-upload */ \"./src/display-upload.js\");\n/* harmony import */ var _display_gallery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./display-gallery */ \"./src/display-gallery.js\");\n\n\n\n\n\nObject(_display_menu__WEBPACK_IMPORTED_MODULE_0__[\"displayMenu\"])();\nObject(_display_footer__WEBPACK_IMPORTED_MODULE_1__[\"displayFooter\"])();\nObject(_display_upload__WEBPACK_IMPORTED_MODULE_3__[\"displayUpload\"])(10);\nObject(_display_gallery__WEBPACK_IMPORTED_MODULE_4__[\"displayImages\"])();\nObject(_random_background__WEBPACK_IMPORTED_MODULE_2__[\"randomBackground\"])(5);\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 
@@ -178,7 +166,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _dis
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"insertElement\", function() { return insertElement; });\n/**\r\n * Create a new HTMLElement and append it in the given parent.\r\n * \r\n * @description Creates a HTML tag using the first parameter. If the second\r\n * parameter is set, append text inside this tag. If the third parameter is\r\n * set, append the created tag inside the parent.\r\n * @example insertElement(\"a\", \"Click me!\", \".a-container\");\r\n * @param {string} tag The HTML tag to create.\r\n * @param {string} text The text that will be displayed inside the tag.\r\n * E.g. <a>Text</a>.\r\n * @param {string|HTMLElement} parent The parent of the created tag. The tag will be inserted into this parent. //TODO Improve this definition\r\n * @returns {HTMLElement} The created HTMLElement.\r\n */\nfunction insertElement(tag, text, parent) {\n  if (!tag || \"string\" !== typeof tag) {\n    throw new Error(\"insertElement requires a tag\\n\" + tag + \" is not allowed as a tag parameter\");\n  }\n\n  tag = document.createElement(tag);\n\n  if (\"undefined\" !== typeof text) {\n    tag.appendChild(document.createTextNode(text));\n  }\n\n  if (\"undefined\" !== typeof parent) {\n    // if (parent instanceof HTMLElement) {\n    //     parent = document.querySelector(parent);\n    // }\n    if (\"string\" === typeof parent) {\n      parent = document.querySelector(parent);\n    }\n\n    parent.appendChild(tag);\n  }\n\n  return tag;\n}\n\n//# sourceURL=webpack:///./src/insert-element.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"insertElement\", function() { return insertElement; });\n/**\r\n * Create a new HTMLElement and append it in the given parent.\r\n * \r\n * @description Creates a HTML tag using the first parameter. If the second\r\n * parameter is set, append text inside this tag. If the third parameter is\r\n * set, append the created tag inside the parent.\r\n * @example insertElement(\"a\", \"Click me!\", \".a-container\");\r\n * @param {string} tag The HTML tag to create.\r\n * @param {string} text The text that will be displayed inside the tag.\r\n * E.g. <a>Text</a>.\r\n * @param {string|HTMLElement} parent The parent of the created tag. The tag will be inserted into this parent. //TODO Improve this definition\r\n * @returns {HTMLElement} The created HTMLElement.\r\n */\nfunction insertElement(tag, text, parent) {\n  if (!tag || \"string\" !== typeof tag) {\n    throw new Error(\"insertElement requires a tag\\n\" + tag + \" is not allowed as a tag parameter\");\n  }\n\n  tag = document.createElement(tag);\n\n  if (\"undefined\" !== typeof text) {\n    tag.appendChild(document.createTextNode(text));\n  }\n\n  if (\"undefined\" !== typeof parent) {\n    // if (parent instanceof HTMLElement) {\n    //     parent = document.querySelector(parent);\n    // }\n    if (!(parent instanceof HTMLElement)) {\n      parent = document.querySelector(parent);\n    }\n\n    parent.appendChild(tag);\n  }\n\n  return tag;\n}\n\n//# sourceURL=webpack:///./src/insert-element.js?");
 
 /***/ }),
 
@@ -202,6 +190,30 @@ eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack:///./src/
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"pushImage\", function() { return pushImage; });\n/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app */ \"./src/app.js\");\n\n/**\r\n * Push images in the image table.\r\n * \r\n * @description //TODO\r\n * @example //TODO\r\n * @param {string} url The (relative or absolute) path to the file.\r\n * @param {Object} colors The colors of the image.\r\n */\n\nfunction pushImage(url, colors) {\n  var app = Object(_app__WEBPACK_IMPORTED_MODULE_0__[\"getApp\"])();\n  app.images.push({\n    url: url,\n    colors: colors\n  });\n  localStorage.setItem(app.namespace, JSON.stringify(app));\n}\n\n//# sourceURL=webpack:///./src/push-image.js?");
+
+/***/ }),
+
+/***/ "./src/random-background.js":
+/*!**********************************!*\
+  !*** ./src/random-background.js ***!
+  \**********************************/
+/*! exports provided: randomBackground */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"randomBackground\", function() { return randomBackground; });\n/* harmony import */ var _random_int__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./random-int */ \"./src/random-int.js\");\n\n/**\r\n * Randomly change the background on page load.\r\n *\r\n * @description Changes the background using randomly each time the page is loaded.\r\n * @example randomBackground(5);\r\n * @param {number} i The number of images to pick from (i.e 5 means 6 backgrounds to pick from).\r\n * \r\n */\n\nfunction randomBackground(i) {\n  var url = \"background-image:url(assets/background/\" + Object(_random_int__WEBPACK_IMPORTED_MODULE_0__[\"randomInt\"])(i) + \".webp)\";\n  document.querySelector(\".background\").style = url;\n  return url;\n}\n\n//# sourceURL=webpack:///./src/random-background.js?");
+
+/***/ }),
+
+/***/ "./src/random-int.js":
+/*!***************************!*\
+  !*** ./src/random-int.js ***!
+  \***************************/
+/*! exports provided: randomInt */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"randomInt\", function() { return randomInt; });\n/**\r\n * Randomly generates an integer, between 0 and max.\r\n *\r\n * @description This function generates a random integer and returns it.\r\n * @example const randomNumber = randomInt(5);\r\n * @param {number} max The maximum of the generated number.\r\n * @returns {number} An integer between 0 and max.\r\n */\nfunction randomInt(max) {\n  return Math.floor(Math.random() * Math.floor(max));\n}\n\n//# sourceURL=webpack:///./src/random-int.js?");
 
 /***/ }),
 
