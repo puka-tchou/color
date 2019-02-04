@@ -8,21 +8,24 @@
  * @param {string} tag The HTML tag to create.
  * @param {string} text The text that will be displayed inside the tag.
  * E.g. <a>Text</a>.
- * @param {string} parent The parent of the created tag. The tag will be
- * inserted into this parent.
+ * @param {string|HTMLElement} parent The parent of the created tag. The tag will be inserted into this parent. //TODO Improve this definition
  * @returns {HTMLElement} The created HTMLElement.
  */
 export function insertElement(tag, text, parent) {
     if (!tag || "string" !== typeof tag) {
-        throw new Error("insertElement requires a tag\n" + tag +
-            " is not allowed as a tag parameter");
+        throw new Error("insertElement requires a tag\n" + tag + " is not allowed as a tag parameter");
     }
     tag = document.createElement(tag);
     if ("undefined" !== typeof text) {
         tag.appendChild(document.createTextNode(text));
     }
     if ("undefined" !== typeof parent) {
-        parent = document.querySelector(parent);
+        // if (parent instanceof HTMLElement) {
+        //     parent = document.querySelector(parent);
+        // }
+        if ("string" === typeof parent) {
+            parent = document.querySelector(parent);
+        }
         parent.appendChild(tag);
     }
     return tag;
