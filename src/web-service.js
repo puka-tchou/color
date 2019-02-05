@@ -14,19 +14,19 @@ export function queryWebService(method, query, body, success) {
   if (query === null) {
     xhr.open(
       method,
-      "https://api.imagga.com/v2/colors?extract_object_colors=0"
+      'https://api.imagga.com/v2/colors?extract_object_colors=0',
     );
   } else {
     xhr.open(
       method,
-      `https://api.imagga.com/v2/colors?extract_object_colors=0&image_url=${query}`
+      `https://api.imagga.com/v2/colors?extract_object_colors=0&image_url=${query}`,
     );
   }
   xhr.setRequestHeader(
-    "authorization",
-    "Basic YWNjX2VhMWFiMDhmM2JjMmI0NjpmNjU1NTRjMjlkZmU2MjBkZjZkNzlhOWI4NTZjOGRjYQ=="
+    'authorization',
+    'Basic YWNjX2VhMWFiMDhmM2JjMmI0NjpmNjU1NTRjMjlkZmU2MjBkZjZkNzlhOWI4NTZjOGRjYQ==',
   );
-  xhr.onloadend = function(event) {
+  xhr.onloadend = (event) => {
     if (xhr.status === 200) {
       success(xhr.response, query);
     }

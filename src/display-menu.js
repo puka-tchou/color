@@ -1,24 +1,24 @@
-import { insertElement } from "./insert-element";
+import { insertElement } from './insert-element';
 /**
  * @type {Object}
  */
 const menuItems = [
   {
-    name: "accueil",
-    url: "index.html"
+    name: 'accueil',
+    url: 'index.html',
   },
   {
-    name: "galerie",
-    url: "gallery.html"
+    name: 'galerie',
+    url: 'gallery.html',
   },
   {
-    name: "github",
-    url: "#"
+    name: 'github',
+    url: '#',
   },
   {
-    name: "documentation",
-    url: "/docs/index.html"
-  }
+    name: 'documentation',
+    url: '/docs/index.html',
+  },
 ];
 /**
  * Display the menu links.
@@ -29,11 +29,11 @@ const menuItems = [
  */
 export function displayMenu() {
   for (const item of menuItems) {
-    const menuItem = insertElement("li", "", ".js-menu");
-    const menuLink = insertElement("a", item.name);
-    menuLink.setAttribute("class", "nav-link");
-    menuLink.setAttribute("href", item.url);
-    menuItem.setAttribute("class", "nav-item");
+    const menuItem = insertElement('li', '', '.js-menu');
+    const menuLink = insertElement('a', item.name);
+    menuLink.setAttribute('class', 'nav-link');
+    menuLink.setAttribute('href', item.url);
+    menuItem.setAttribute('class', 'nav-item');
     menuItem.appendChild(menuLink);
   }
   return true;

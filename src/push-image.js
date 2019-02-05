@@ -1,4 +1,4 @@
-import { getApp } from "./app";
+import { getApp } from './app';
 
 /**
  * Push images in the image table.
@@ -12,7 +12,7 @@ export function pushImage(url, colors) {
   const app = getApp();
   app.images.push({
     url,
-    colors
+    colors,
   });
   localStorage.setItem(app.namespace, JSON.stringify(app));
 }

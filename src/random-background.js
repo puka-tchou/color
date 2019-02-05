@@ -1,4 +1,4 @@
-import { randomInt } from "./random-int";
+import { randomInt } from './random-int';
 /**
  * Randomly change the background on page load.
  *
@@ -9,6 +9,6 @@ import { randomInt } from "./random-int";
  */
 export function randomBackground(i) {
   const url = `background-image:url(assets/background/${randomInt(i)}.webp)`;
-  document.querySelector(".background").style = url;
+  document.querySelector('.background').style = url;
   return url;
 }

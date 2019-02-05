@@ -1,4 +1,4 @@
-import { insertElement } from "./insert-element";
+import { insertElement } from './insert-element';
 
 /**
  * Display a list containing the extensions of files accepted.
@@ -7,8 +7,8 @@ import { insertElement } from "./insert-element";
  * @example //TODO
  */
 export function displayFooter() {
-  const validExtensions = [".jpg", ".jpeg", ".png", ".gif"];
+  const validExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
   for (const element of validExtensions) {
-    insertElement("li", element, "ul.js-extension-list");
+    insertElement('li', element, 'ul.js-extension-list');
   }
 }
