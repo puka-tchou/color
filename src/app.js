@@ -1,16 +1,16 @@
-var app = {
-    namespace: "color_app",
-    images: JSON.parse(localStorage.getItem("color_app"))
+const app = {
+  namespace: "color_app",
+  images: JSON.parse(localStorage.getItem("color_app"))
 };
 if (!app.images) {
-    app.images = [];
+  app.images = [];
 } else {
-    app.images = app.images.images;
+  app.images = app.images.images;
 }
 
 /**
  * @returns {Object}
  */
 export function getApp() {
-    return app;
+  return app;
 }

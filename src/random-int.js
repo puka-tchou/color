@@ -7,5 +7,5 @@
  * @returns {number} An integer between 0 and max.
  */
 export function randomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
+  return Math.floor(Math.random() * Math.floor(max));
 }
