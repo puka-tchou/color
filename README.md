@@ -1,6 +1,6 @@
 # Color
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/aefc19dff8cf4a7f96b28dc0df266c1d)](https://app.codacy.com/project/Gaspacchio/color/dashboard?branchId=10997717&token=ab0CnFyEyrs6yNM)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/aefc19dff8cf4a7f96b28dc0df266c1d)](https://app.codacy.com/project/Gaspacchio/color/dashboard?branchId=10997717&token=ab0CnFyEyrs6yNM) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 ## Introduction
 
