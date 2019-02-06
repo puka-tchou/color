@@ -1,24 +1,16 @@
 import { getApp } from './app';
 import { insertElement } from './insert-element';
+import { deleteImage } from './delete-image';
+import { removeInside } from './remove-inside';
 
 const app = getApp();
 /**
- * Remove all that is inside a selector.
+ * Removes the image from the preview zone when the user clicks it.
  *
- * @description //TODO
- * @example removeInside(".css-selector");
- * @param {string} selector The selector to target.
+ * @description Removes the image from the preview zone when the user clicks it.
+ * @example removePreview();
  */
-function removeInside(selector) {
-  document.querySelector(selector).innerHTML = '';
-}
-/**
- * Removes the image from the preview zone when the user clicks it again.
- *
- * @description //TODO
- * @example //TODO
- */
-function removePreview() {
+export function removePreview() {
   const preview = document.querySelector('.clicked');
   if (preview) {
     preview.className = 'js-image-preview item-center';
@@ -26,7 +18,10 @@ function removePreview() {
     removeInside('.js-color-list');
   }
 }
-
+/**
+ * @description Display the color list of the image in the preview zone.
+ * @param {Object} image The object containing the image that is clicked.
+ */
 function displayColor(image) {
   removeInside('.js-color-list');
   image.colors.forEach(element => {
@@ -36,9 +31,9 @@ function displayColor(image) {
 /**
  * Display an image in the preview zone when the user cliks it.
  *
- * @description //TODO
- * @example //TODO
- * @param {undefined} event The event triggered.
+ * @description Display an image in the preview zone when the user cliks it.
+ * @example target.addEventListener('click', previewImage);
+ * @param {Object} event The event triggered.
  */
 export function previewImage(event) {
   const preview = document.querySelector('.js-image-preview');
@@ -52,8 +47,8 @@ export function previewImage(event) {
 /**
  * Display the images in a gallery and add eventListeners.
  *
- * @description //TODO
- * @example //TODO
+ * @description Display the images in a gallery and add eventListeners.
+ * @example displayImages();
  */
 export function displayImages() {
   const gallery = document.querySelector('.js-gallery');
@@ -67,32 +62,5 @@ export function displayImages() {
     galleryItem.style = `background-image: url(${element.url})`;
     galleryItem.addEventListener('click', previewImage);
     deleteImage(deleteBtn, element);
-  });
-}
-/**
- * Delete an image from the gallery when the users cliks on the button.
- *
- * @description //TODO
- * @example //TODO
- * @param {string} button The button to delete an image.
- * @param {Array} image The list of images.
- */
-export function deleteImage(button, image) {
-  const preview = document.querySelector('.js-image-preview');
-  button.addEventListener('click', event => {
-    event.stopPropagation();
-    if (window.confirm("Voulez-vraiment supprimer l'image ?")) {
-      const result = app.images.find(item => item.url === image.url);
-      const key = app.images.indexOf(result);
-      app.images.splice(key, 1);
-      localStorage.setItem(app.namespace, JSON.stringify(app));
-      const gallery = document.querySelector('.js-gallery');
-      gallery.innerHTML = '';
-      displayImages();
-      if (preview.getAttribute('src') === image.url) {
-        removePreview();
-        removeInside('.js-color-list');
-      }
-    }
   });
 }

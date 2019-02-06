@@ -1,9 +1,9 @@
 /**
  * Connect to the web service to get images colors.
  *
- * @description //TODO
- * @example //TODO
- * @param {string} method The used to connect to the web service.
+ * @description Connect to the web service to get images colors.
+ * @example queryWebService('GET', url, null, (response, url) => {console.log(response);});
+ * @param {string} method The method used to connect to the web service, GET or POST.
  * @param {string} query The complete query to append at the end of the url
  * e.g "&Yay".
  * @param {FormData} body The value that will go in the xhr.send() statement.

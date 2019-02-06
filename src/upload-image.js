@@ -4,8 +4,8 @@ import { queryWebService } from './web-service';
 /**
  * On file change, send the file to the web service.
  *
- * @description //TODO
- * @example //TODO
+ * @description On file change, send the file to the web service.
+ * @example onFileChange(button);
  * @param {HTMLElement} button The button that is clicked by the user.
  */
 export function onFileChange(button) {
@@ -32,8 +32,8 @@ export function onFileChange(button) {
 /**
  * On url input, send the file to the web service.
  *
- * @description //TODO
- * @example //TODO
+ * @description On url input, send the file to the web service.
+ * @example onFormSubmit(form);
  * @param {HTMLFormElement} form The form that is submitted.
  */
 export function onFormSubmit(form) {

@@ -3,11 +3,10 @@ import { insertElement } from './insert-element';
 import { onFileChange, onFormSubmit } from './upload-image';
 
 /**
- * Display the upload button and the title and add a onclick event to the
- * button.
+ * Display the upload button and the title and add an onclick() event to the button.
  *
- * @description //TODO
- * @example //TODO
+ * @description Display the upload button and the title and add an onclick() event to the button.
+ * @example displayUpload(5);
  * @param {number} max The maximum number of images accepted in the gallery.
  */
 export function displayUpload(max) {

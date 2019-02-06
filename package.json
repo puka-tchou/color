@@ -9,8 +9,8 @@
     "dev": "webpack --mode development --watch",
     "prod": "webpack --mode production --watch",
     "build": "webpack --mode production",
-    "doc": "jsdoc2md src/*.js > DOCUMENTATION.md; remark DOCUMENTATION.md; remark DOCUMENTATION.md -o",
-    "lint:md": "remark .; remark . -o"
+    "doc": "jsdoc2md src/*.js > DOCUMENTATION.md; remark DOCUMENTATION.md -o",
+    "lint:md": "remark . -o"
   },
   "author": "Gaspacchio",
   "license": "MIT",

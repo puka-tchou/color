@@ -3,14 +3,10 @@ import { insertElement } from './insert-element';
 /**
  * Display a list containing the extensions of files accepted.
  *
- * @description //TODO
- * @example //TODO
+ * @description Display a list containing the files accepted in the footer.
  */
 export function displayFooter() {
   const validExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
-  // for (const element of validExtensions) {
-  //   insertElement('li', element, 'ul.js-extension-list');
-  // }
   validExtensions.forEach(value => {
     insertElement('li', value, 'ul.js-extension-list');
   });
