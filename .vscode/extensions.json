@@ -5,11 +5,11 @@
   "recommendations": [
     "teabyii.ayu",
     "aaron-bond.better-comments",
-    "dbaeumer.vscode-eslint"
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode"
   ],
   // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
   "unwantedRecommendations": [
-    "hookyqr.beautify",
-    "esbenp.prettier-vscode"
+    "hookyqr.beautify"
   ]
 }
