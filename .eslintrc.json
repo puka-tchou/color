@@ -3,8 +3,10 @@
     "browser": true,
     "es6": true
   },
-  "extends": "airbnb",
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["prettier"],
   "rules": {
-    "import/prefer-default-export": false
+    "import/prefer-default-export": false,
+    "prettier/prettier": ["error"]
   }
 }
