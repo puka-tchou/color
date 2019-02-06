@@ -11,9 +11,7 @@
  */
 export function insertElement(tag, text, parent) {
   if (!tag || typeof tag !== 'string') {
-    throw new Error(
-      `insertElement requires a tag\n${tag} is not allowed as a tag parameter.`,
-    );
+    throw new Error(`insertElement requires a tag\n${tag} is not allowed as a tag parameter.`);
   }
   const createdTag = document.createElement(tag);
   if (typeof text !== 'undefined') {
@@ -22,9 +20,10 @@ export function insertElement(tag, text, parent) {
   if (typeof parent !== 'undefined') {
     if (!(parent instanceof HTMLElement)) {
       const selectedParent = document.querySelector(parent);
-      selectedParent.appendChild(tag);
+      selectedParent.appendChild(createdTag);
+      return createdTag;
     }
-    parent.appendChild(tag);
+    parent.appendChild(createdTag);
   }
-  return tag;
+  return createdTag;
 }

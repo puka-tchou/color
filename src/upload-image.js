@@ -10,19 +10,19 @@ import { queryWebService } from './web-service';
  */
 export function onFileChange(button) {
   const file = document.querySelector('#js-file');
-  button.onclick = () => file.click();
-  file.addEventListener('change', (event) => {
+  const clickedButton = button;
+  clickedButton.onclick = () => file.click();
+  file.addEventListener('change', event => {
     const formData = new FormData();
     formData.append('image', file.files[0]);
-    queryWebService('POST', null, formData, (response) => {
+    queryWebService('POST', null, formData, response => {
       const reader = new FileReader();
-      reader.onloadend = (event) => {
-        const file = event.target.result;
-        pushImage(file, JSON.parse(response).result.colors.image_colors);
+      reader.onloadend = success => {
+        const result = event.target.result;
+        pushImage(result, JSON.parse(response).result.colors.image_colors);
         displayImages();
-        document
-          .querySelector('div.js-gallery a.image-item:last-child')
-          .click();
+        document.querySelector('div.js-gallery a.image-item:last-child').click();
+        return success;
       };
       reader.readAsDataURL(file.files[0]);
     });
@@ -37,7 +37,7 @@ export function onFileChange(button) {
  * @param {HTMLFormElement} form The form that is submitted.
  */
 export function onFormSubmit(form) {
-  form.addEventListener('submit', (event) => {
+  form.addEventListener('submit', event => {
     event.preventDefault();
     queryWebService('GET', form.elements.url.value, null, (response, url) => {
       pushImage(url, JSON.parse(response).result.colors.image_colors);

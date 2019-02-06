@@ -29,9 +29,9 @@ function removePreview() {
 
 function displayColor(image) {
   removeInside('.js-color-list');
-  for (const color of image.colors) {
-    insertElement('li', color.html_code, '.js-color-list');
-  }
+  image.colors.forEach(element => {
+    insertElement('li', element.html_code, '.js-color-list');
+  });
 }
 /**
  * Display an image in the preview zone when the user cliks it.
@@ -58,16 +58,16 @@ export function previewImage(event) {
 export function displayImages() {
   const gallery = document.querySelector('.js-gallery');
   gallery.innerHTML = '';
-  for (const image of app.images) {
+  app.images.forEach(element => {
     const galleryItem = insertElement('a', '', '.js-gallery');
     const deleteBtn = insertElement('button', 'x', galleryItem);
     deleteBtn.className = 'btn--danger';
     galleryItem.className = 'image-item box-shadow transition';
-    galleryItem.setAttribute('dataUrl', image.url);
-    galleryItem.style = `background-image: url(${image.url})`;
+    galleryItem.setAttribute('dataUrl', element.url);
+    galleryItem.style = `background-image: url(${element.url})`;
     galleryItem.addEventListener('click', previewImage);
-    deleteImage(deleteBtn, image);
-  }
+    deleteImage(deleteBtn, element);
+  });
 }
 /**
  * Delete an image from the gallery when the users cliks on the button.
@@ -79,7 +79,7 @@ export function displayImages() {
  */
 export function deleteImage(button, image) {
   const preview = document.querySelector('.js-image-preview');
-  button.addEventListener('click', (event) => {
+  button.addEventListener('click', event => {
     event.stopPropagation();
     if (window.confirm("Voulez-vraiment supprimer l'image ?")) {
       const result = app.images.find(item => item.url === image.url);

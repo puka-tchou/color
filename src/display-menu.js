@@ -5,20 +5,20 @@ import { insertElement } from './insert-element';
 const menuItems = [
   {
     name: 'accueil',
-    url: 'index.html',
+    url: 'index.html'
   },
   {
     name: 'galerie',
-    url: 'gallery.html',
+    url: 'gallery.html'
   },
   {
     name: 'github',
-    url: '#',
+    url: '#'
   },
   {
     name: 'documentation',
-    url: '/docs/index.html',
-  },
+    url: '/docs/index.html'
+  }
 ];
 /**
  * Display the menu links.
@@ -28,13 +28,13 @@ const menuItems = [
  * @param {Array} menu The array containing menu objects.
  */
 export function displayMenu() {
-  for (const item of menuItems) {
+  menuItems.forEach(element => {
     const menuItem = insertElement('li', '', '.js-menu');
-    const menuLink = insertElement('a', item.name);
+    const menuLink = insertElement('a', element.name);
     menuLink.setAttribute('class', 'nav-link');
-    menuLink.setAttribute('href', item.url);
+    menuLink.setAttribute('href', element.url);
     menuItem.setAttribute('class', 'nav-item');
     menuItem.appendChild(menuLink);
-  }
-  return true;
+  });
+  return menuItems;
 }

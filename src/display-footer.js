@@ -8,7 +8,10 @@ import { insertElement } from './insert-element';
  */
 export function displayFooter() {
   const validExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
-  for (const element of validExtensions) {
-    insertElement('li', element, 'ul.js-extension-list');
-  }
+  // for (const element of validExtensions) {
+  //   insertElement('li', element, 'ul.js-extension-list');
+  // }
+  validExtensions.forEach(value => {
+    insertElement('li', value, 'ul.js-extension-list');
+  });
 }

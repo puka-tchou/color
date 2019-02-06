@@ -6,36 +6,36 @@ module.exports = {
   entry: ['./src/index.js', './src/main.scss'],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'index.js',
+    filename: 'index.js'
   },
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: ['babel-loader'],
+        use: ['babel-loader']
       },
       {
         test: /\.scss$/,
         exclude: /node_modules/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
-      },
-    ],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+      }
+    ]
   },
   watchOptions: {
-    ignored: [/node_modules/, /test/],
+    ignored: [/node_modules/, /test/]
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'style.css',
+      filename: 'style.css'
     }),
     new BrowserSyncPlugin({
       host: 'localhost',
       port: 3000,
       files: ['index.html'],
       server: {
-        baseDir: ['./'],
-      },
-    }),
-  ],
+        baseDir: ['./']
+      }
+    })
+  ]
 };
