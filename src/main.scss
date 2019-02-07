@@ -1,58 +1,57 @@
-@import "~knacss/sass/knacss.scss";
+@import '~knacss/sass/knacss.scss';
 // @import "~buddycss/src/sass/import.scss";
 
 /*--- GENERAL LAYOUT ---*/
 .padding {
-	padding: 1em;
+  padding: 1em;
 }
 
 .background {
-	min-height: 100vh;
-	background-position: center;
-	background-attachment: fixed;
-	background-size: cover;
-	image-rendering: crisp-edges;
-	image-rendering: pixelated;
-	padding: 150px 0;
+  min-height: 100vh;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+  padding: 150px 0;
 }
 
 /*--- HEADER ---*/
 header {
-	background-color: $gray-200;
+  background-color: $gray-200;
 
-	ul {
-		list-style-type: none;
-	}
+  ul {
+    list-style-type: none;
+  }
 }
-
 /*--- MAIN ---*/
 main {
-	min-width: 100%;
-	background: $gray-200;
+  min-width: 100%;
+  background: $gray-200;
 }
 
 /*--- PREVIEW ---*/
 .preview {
-	height: 50vh;
-	overflow: auto;
+  height: 50vh;
+  overflow: auto;
 
-	img {
-		max-width: 100%;
-		max-height: 100%;
-	}
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
 }
 
 /*--- GALLERY ---*/
 .image-item {
-	display: block;
-	width: 300px;
-	height: 300px;
-	background-position: center;
-	background-size: cover;
+  display: block;
+  width: 300px;
+  height: 300px;
+  background-position: center;
+  background-size: cover;
 }
 
 /*--- FOOTER ---*/
 footer {
-	background-color: $gray-700;
-	color: $gray-100;
+  background-color: $gray-700;
+  color: $gray-100;
 }
