@@ -16,7 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "buddycss": "^1.0.7",
-    "eslint-plugin-react-hooks": "^2.0.1",
+    "eslint-plugin-react-hooks": "^1.7.0",
     "fibers": "^4.0.1",
     "knacss": "^7.1.0"
   },
@@ -40,7 +40,7 @@
     "jsdoc": "^3.6.3",
     "jsdoc-to-markdown": "^5.0.1",
     "mini-css-extract-plugin": "^0.8.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "prettier": "^1.18.2",
     "remark": "^11.0.1",
     "remark-cli": "^7.0.0",
